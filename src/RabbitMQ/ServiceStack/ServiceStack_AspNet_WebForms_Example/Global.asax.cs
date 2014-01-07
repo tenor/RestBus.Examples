@@ -1,4 +1,8 @@
-﻿using System;
+﻿using RestBus.ServiceStack;
+using RestBus.RabbitMQ;
+using RestBus.RabbitMQ.Subscriber;
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -9,10 +13,13 @@ using ServiceStack_AspNet_WebForms_Example;
 using ServiceStack.WebHost.Endpoints;
 using ServiceStack_AspNet_WebForms_Example.api.Services;
 
+
 namespace ServiceStack_AspNet_WebForms_Example
 {
     public class Global : HttpApplication
     {
+        RestBusHost restbusHost = null;
+
         void Application_Start(object sender, EventArgs e)
         {
             // Code that runs on application startup
@@ -22,11 +29,27 @@ namespace ServiceStack_AspNet_WebForms_Example
 
             //Initialize ServiceStack application
             new AppHost().Init();
+
+
+            //*** Start RestBus subscriber/host **//
+
+            var amqpUrl = "amqp:localhost:5672"; //AMQP URL for RabbitMQ installation
+            var serviceName = "madagascar"; //Uniquely identifies this service
+
+            var msgMapper = new BasicMessageMapper(amqpUrl, serviceName);
+            var subscriber = new RestBusSubscriber(msgMapper);
+            restbusHost = new RestBusHost(subscriber);
+            restbusHost.Start();
+
+            //****//
         }
 
         void Application_End(object sender, EventArgs e)
         {
             //  Code that runs on application shutdown
+
+            if (restbusHost != null)
+                restbusHost.Stop();
 
         }
 

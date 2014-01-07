@@ -40,6 +40,18 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="RabbitMQ.Client">
+      <HintPath>packages\RabbitMQ.Client.3.0.4\lib\net30\RabbitMQ.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="RestBus.Common">
+      <HintPath>packages\RestBus.Common.0.4.0.0\lib\net45\RestBus.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="RestBus.RabbitMQ">
+      <HintPath>packages\RestBus.RabbitMQ.0.4.2-beta\lib\net45\RestBus.RabbitMQ.dll</HintPath>
+    </Reference>
+    <Reference Include="RestBus.ServiceStack">
+      <HintPath>packages\RestBus.ServiceStack.0.4.3-beta\lib\net45\RestBus.ServiceStack.dll</HintPath>
+    </Reference>
     <Reference Include="ServiceStack">
       <HintPath>packages\ServiceStack.3.9.71\lib\net35\ServiceStack.dll</HintPath>
     </Reference>

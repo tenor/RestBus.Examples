@@ -1,4 +1,8 @@
-﻿using ServiceStack.WebHost.Endpoints;
+﻿using RestBus.RabbitMQ;
+using RestBus.RabbitMQ.Subscriber;
+using RestBus.ServiceStack;
+
+using ServiceStack.WebHost.Endpoints;
 using ServiceStack_AspNet_Example.api.Services;
 using System;
 using System.Collections.Generic;
@@ -16,6 +20,8 @@ namespace ServiceStack_AspNet_Mvc4_Example
 
     public class MvcApplication : System.Web.HttpApplication
     {
+        RestBusHost restbusHost = null;
+
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
@@ -27,6 +33,24 @@ namespace ServiceStack_AspNet_Mvc4_Example
             AuthConfig.RegisterAuth();
 
             new AppHost().Init();
+
+            //*** Start RestBus subscriber/host **//
+
+            var amqpUrl = "amqp:localhost:5672"; //AMQP URL for RabbitMQ installation
+            var serviceName = "madagascar"; //Uniquely identifies this service
+
+            var msgMapper = new BasicMessageMapper(amqpUrl, serviceName);
+            var subscriber = new RestBusSubscriber(msgMapper);
+            restbusHost = new RestBusHost(subscriber);
+            restbusHost.Start();
+
+            //****//
+        }
+
+        protected void Application_End()
+        {
+            if (restbusHost != null)
+                restbusHost.Stop();
         }
 
         public class AppHost : AppHostBase
