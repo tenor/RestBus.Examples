@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>RestBus.Common</id>
+    <version>0.4.0.0</version>
+    <title>RestBus</title>
+    <authors>Sunny Ahuwanya</authors>
+    <owners>Sunny Ahuwanya</owners>
+    <projectUrl>http://www.restbus.org/</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Easy Asynchronous Messaging and Queueing for .NET</description>
+    <releaseNotes />
+    <copyright>Copyright 2014</copyright>
+    <tags>messaging amqp rabbitmq queue queueing</tags>
+  </metadata>
+</package>
