@@ -30,7 +30,8 @@ namespace ConsoleClientExample
              */
 
             //Send Request
-            var response = client.GetAsync("/hello/random", requestOptions).Result;
+            var uri = "api/values"; //Substitute "hello/random" for the ServiceStack example
+            var response = client.GetAsync(uri, requestOptions).Result;
 
             //Display reponse;
             Console.WriteLine(response.StatusCode);

@@ -11,6 +11,8 @@ namespace WebClientExample
 {
     public partial class _Default : Page
     {
+        public string Uri = "/api/values/"; //Substitute "/hello/" for the ServiceStack example
+
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -26,14 +28,11 @@ namespace WebClientExample
             requestOptions.Headers.Add("Accept", "application/json");
 
             //Send Request
-            var response = Global.HelloServiceClient.GetAsync("/hello/" + TextBoxName.Text, requestOptions).Result;
+            var response = Global.HelloServiceClient.GetAsync(Uri + TextBoxName.Text, requestOptions).Result;
 
-            //Get Response object
-            var resObj = Newtonsoft.Json.JsonConvert.DeserializeAnonymousType( response.Content.ReadAsStringAsync().Result, new { Result = "" });
-            
             //Display result
             PanelResponse.Visible = true;
-            LabelResponse.Text = resObj.Result;
+            LabelResponse.Text = response.Content.ReadAsStringAsync().Result;
 
         }
     }

@@ -16,8 +16,8 @@
 </asp:Content>
 <asp:Content runat="server" ID="BodyContent" ContentPlaceHolderID="MainContent">
 
-    <asp:Label ID="LabelName" runat="server" Text="Name: "></asp:Label>
-    <asp:TextBox ID="TextBoxName" runat="server">random</asp:TextBox>&nbsp;<asp:Button ID="ButtonSend" runat="server" Text="Send" OnClick="ButtonSend_Click" />
+    <asp:Label ID="LabelName" runat="server" ><%: Uri %></asp:Label>
+    <asp:TextBox ID="TextBoxName" runat="server">5</asp:TextBox>&nbsp;<asp:Button ID="ButtonSend" runat="server" Text="Send" OnClick="ButtonSend_Click" />
 
     <asp:Panel ID="PanelResponse" runat="server" Height="108px" Visible="false">
         <h3>Response:</h3>
