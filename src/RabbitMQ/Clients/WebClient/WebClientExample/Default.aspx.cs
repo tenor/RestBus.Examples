@@ -18,7 +18,7 @@ namespace WebClientExample
 
         }
 
-        protected void ButtonSend_Click(object sender, EventArgs e)
+        protected async void ButtonSend_Click(object sender, EventArgs e)
         {
 
             RequestOptions requestOptions = null;
@@ -28,7 +28,7 @@ namespace WebClientExample
             requestOptions.Headers.Add("Accept", "application/json");
 
             //Send Request
-            var response = Global.HelloServiceClient.GetAsync(Uri + TextBoxName.Text, requestOptions).Result;
+            var response = await Global.HelloServiceClient.GetAsync(Uri + TextBoxName.Text, requestOptions);
 
             //Display result
             PanelResponse.Visible = true;

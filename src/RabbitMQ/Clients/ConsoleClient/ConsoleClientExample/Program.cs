@@ -29,17 +29,22 @@ namespace ConsoleClientExample
             requestOptions.Headers.Add("Accept", "application/json");
              */
 
-            //Send Request
-            var uri = "api/values"; //Substitute "hello/random" for the ServiceStack example
-            var response = client.GetAsync(uri, requestOptions).Result;
+            var response = SendMessage(client, requestOptions).Result;
 
-            //Display reponse;
+            //Display response
             Console.WriteLine(response.StatusCode);
             Console.WriteLine(response.Content.ReadAsStringAsync().Result);
 
             client.Dispose();
             Console.ReadKey();
 
+        }
+
+        private async static Task<System.Net.Http.HttpResponseMessage> SendMessage(RestBusClient client, RequestOptions requestOptions)
+        {
+            //Send Request
+            var uri = "api/values"; //Substitute "hello/random" for the ServiceStack example
+            return await client.GetAsync(uri, requestOptions);
         }
     }
 }

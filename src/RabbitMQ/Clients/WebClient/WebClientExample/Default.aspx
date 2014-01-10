@@ -1,4 +1,4 @@
-﻿<%@ Page Title="RestBus RabbitMQ Client" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="WebClientExample._Default" %>
+﻿<%@ Page Title="RestBus RabbitMQ Client" Language="C#" MasterPageFile="~/Site.Master" Async="true" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="WebClientExample._Default" %>
 
 <asp:Content runat="server" ID="FeaturedContent" ContentPlaceHolderID="FeaturedContent">
     <section class="featured">
