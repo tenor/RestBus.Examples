@@ -36,8 +36,8 @@ namespace ServiceStack_AspNet_Mvc4_Example
 
             //*** Start RestBus subscriber/host **//
 
-            var amqpUrl = "amqp:localhost:5672"; //AMQP URL for RabbitMQ installation
-            var serviceName = "madagascar"; //Uniquely identifies this service
+            var amqpUrl = "amqp://localhost:5672"; //AMQP URL for RabbitMQ installation
+            var serviceName = "samba"; //Uniquely identifies this service
 
             var msgMapper = new BasicMessageMapper(amqpUrl, serviceName);
             var subscriber = new RestBusSubscriber(msgMapper);

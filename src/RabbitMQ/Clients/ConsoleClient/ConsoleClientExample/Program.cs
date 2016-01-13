@@ -14,8 +14,8 @@ namespace ConsoleClientExample
         static void Main(string[] args)
         {
 
-            var amqpUrl = "amqp:localhost:5672"; //AMQP URL for RabbitMQ installation
-            var serviceName = "madagascar"; //The unique identifier for the target service
+            var amqpUrl = "amqp://localhost:5672"; //AMQP URL for RabbitMQ server
+            var serviceName = "samba"; //The unique identifier for the target service
 
             var msgMapper = new BasicMessageMapper(amqpUrl, serviceName);
 
