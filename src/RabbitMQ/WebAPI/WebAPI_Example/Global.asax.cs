@@ -1,5 +1,5 @@
 ﻿using RestBus.RabbitMQ;
-using RestBus.RabbitMQ.Subscriber;
+using RestBus.RabbitMQ.Subscription;
 using RestBus.WebApi;
 
 using System.Web.Http;
