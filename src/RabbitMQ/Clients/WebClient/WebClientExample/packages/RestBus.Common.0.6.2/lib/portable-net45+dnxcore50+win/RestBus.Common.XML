@@ -1,0 +1,187 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>RestBus.Common</name>
+    </assembly>
+    <members>
+        <member name="T:RestBus.Common.Amqp.AmqpConnectionInfo">
+            <summary>
+            Represents a connection string to an AMQP server
+            </summary>
+        </member>
+        <member name="P:RestBus.Common.Amqp.AmqpConnectionInfo.Uri">
+            <summary>
+            The connection AMQP Uri.
+            </summary>
+        </member>
+        <member name="P:RestBus.Common.Amqp.AmqpConnectionInfo.FriendlyName">
+            <summary>
+            The friendly name of this connection, used for logging purposes.
+            </summary>
+            <remarks>
+            The host will display and or log this value, instead of the Uri, which can contain sensitive information such as passwords.
+            </remarks>
+        </member>
+        <member name="P:RestBus.Common.Amqp.MessagingConfiguration.PersistentMessages">
+            <summary>
+            Controls the message delivery mode.
+            Set to true to persist messages to disk and false to not.
+            This property has no effect if the work queue is non durable.
+            <seealso cref="P:RestBus.Common.Amqp.MessagingConfiguration.PersistentWorkQueuesAndExchanges"/>
+            </summary>
+        </member>
+        <member name="P:RestBus.Common.Amqp.MessagingConfiguration.PersistentWorkQueuesAndExchanges">
+            <summary>
+            Controls the durability of work queues and exchanges.
+            Set to true to make work queues and exchanges durable. i.e. survive a server restart, and to false to make work queues transient. 
+            </summary>
+            <remarks>
+            This property only controls the durabilty of work queues and exchanges. It doesn't control the durability of messages sent to the work queue.
+            <seealso cref="P:RestBus.Common.Amqp.MessagingConfiguration.PersistentMessages"/>
+            </remarks>
+        </member>
+        <member name="P:RestBus.Common.Amqp.MessagingConfiguration.MessageExpires">
+            <summary>
+            A function that returns an indicator that the message should expire.
+            If not set, messages expire by default.
+            </summary>
+        </member>
+        <member name="P:RestBus.Common.Amqp.MessagingConfiguration.MessageExpectsReply">
+            <summary>
+            A function that returns an indicator that the message expects a reply.
+            If not set, messages expect replies by default.
+            </summary>
+        </member>
+        <member name="T:RestBus.Common.SequenceGenerator">
+            <summary>
+            Generates numbers and ids sequentially in a thread-safe manner
+            </summary>
+        </member>
+        <member name="M:RestBus.Common.SequenceGenerator.#ctor(System.Int64,System.Boolean)">
+            <summary>
+            Initializes a new <see cref="T:RestBus.Common.SequenceGenerator"/>
+            </summary>
+            <param name="startValue">Value to start generating sequences from</param>
+            <param name="excludeNegativeNumbers">Set to true to always generate positive numbers, false to include the negative number range</param>
+        </member>
+        <member name="M:RestBus.Common.Shared.IsValidHttpDate(System.String)">
+            <summary>
+            Verifies that the specified date string is in RFC 1123 format
+            </summary>
+            <param name="date"></param>
+            <returns></returns>
+        </member>
+        <member name="T:RestBus.Common.CommonUtils">
+            <summary>
+            This class holds internal utilities that are used by both Client and Subscriber.
+            </summary>
+        </member>
+        <member name="P:RestBus.Common.MessageContext.Dispatch">
+            <summary>
+            Broker specific message item.
+            </summary>
+        </member>
+        <member name="M:RestBus.Common.HttpRequestPacket.BuildUri(System.String,System.String)">
+            <summary>
+            Builds a <see cref="T:System.Uri"/> for this <see cref="T:RestBus.Common.HttpRequestPacket"/>'s resource
+            </summary>
+            <param name="virtualPath">The virtual path (optional)</param>
+            <param name="hostname">The optional hostname (optional)</param>
+            <returns></returns>
+            <exception cref="T:System.InvalidOperationException"> Throws InvalidOperationException if the Resource field is null.</exception>
+        </member>
+        <member name="M:RestBus.Common.HttpRequestPacket.BuildUri(System.String,System.String,System.String)">
+            <summary>
+            Builds a <see cref="T:System.Uri"/> for a specified resource, virtualPath and hostname
+            </summary>
+            <param name="resource"></param>
+            <param name="virtualPath"></param>
+            <param name="hostname"></param>
+            <returns></returns>
+        </member>
+        <member name="T:RestBus.Common.InterlockedBoolean">
+            <summary>
+            Provides a boolean value that can be atomically modified using Interlocked operations.
+            Use this struct only as a field in a class and access it directly from any callee.
+            Do not pass this struct to methods/indexers etc. as it will be copied.
+            </summary>
+            <remarks>
+            Consider using a volatile bool field instead of this type, unless you need Exchange or CompareExchange (SetIf) operations.
+            This type is implicitly convertible to boolean.
+            </remarks>
+        </member>
+        <member name="P:RestBus.Common.InterlockedBoolean.IsFalse">
+            <summary>
+            Returns True, if the value is false
+            </summary>
+        </member>
+        <member name="P:RestBus.Common.InterlockedBoolean.IsTrue">
+            <summary>
+            Returns True, if the value is false
+            </summary>        
+        </member>
+        <member name="M:RestBus.Common.InterlockedBoolean.Set(System.Boolean)">
+            <summary>
+            Sets the value to a specified value
+            </summary>
+            <param name="value">The new value</param>
+        </member>
+        <member name="M:RestBus.Common.InterlockedBoolean.SetIf(System.Boolean,System.Boolean)">
+            <summary>
+            Sets to a specified new value if the existing value matches a specified value
+            </summary>
+            <param name="valueEquals">The compared value</param>
+            <param name="newValue">The new value</param>
+            <returns>True if the set operation succeeded, false otherwise</returns>
+        </member>
+        <member name="M:RestBus.Common.InterlockedBoolean.SetTrueIf(System.Boolean)">
+            <summary>
+            Sets to true if the existing value matches a specified value
+            </summary>
+            <param name="valueEquals"></param>
+            <returns>True if the set operation succeeded, false otherwise</returns>
+        </member>
+        <member name="M:RestBus.Common.InterlockedBoolean.SetFalseIf(System.Boolean)">
+            <summary>
+            Sets to false if the existing value matches a specified value
+            </summary>
+            <param name="valueEquals"></param>
+            <returns>True if the set operation succeeded, false otherwise</returns>
+        </member>
+        <member name="M:RestBus.Common.InterlockedBoolean.Exchange(System.Boolean)">
+            <summary>
+            Atomically exchanges the value to a specified value
+            </summary>
+            <returns>
+            The original value
+            </returns>
+            <param name="value">The new value</param>
+        </member>
+        <member name="T:RestBus.Common.Http.HttpHelpers">
+            <summary>
+            This class contains helpers, used by both subscribers and clients, for working with System.Net.Http classes.
+            </summary>
+        </member>
+        <member name="M:RestBus.Common.Http.HttpHelpers.PopulateHeaders(RestBus.Common.HttpPacket,System.Net.Http.Headers.HttpContentHeaders,System.Net.Http.Headers.HttpHeaders)">
+            <summary>
+            Populates contentheaders and generalheaders with headers from the <see cref="T:RestBus.Common.HttpPacket"/>>
+            </summary>
+            <param name="packet"></param>
+            <param name="contentHeaders"></param>
+            <param name="generalHeaders"></param>
+        </member>
+        <member name="M:RestBus.Common.Http.HttpHelpers.AddHeader(RestBus.Common.HttpRequestPacket,System.Collections.Generic.KeyValuePair{System.String,System.Collections.Generic.IEnumerable{System.String}})">
+            <summary>Adds a header to the request packet. </summary>
+            <remarks>NOTE: This method folds the headers as expected in WebAPI 2's Request.Header object.</remarks>
+        </member>
+        <member name="M:RestBus.Common.Http.HttpHelpers.AddHeader(RestBus.Common.HttpResponsePacket,System.Collections.Generic.KeyValuePair{System.String,System.Collections.Generic.IEnumerable{System.String}})">
+            <summary>Adds a header to the response packet. </summary>
+            <remarks>NOTE: This method does not fold the headers as expected in WebAPI 2's response stream.</remarks> 
+        </member>
+        <member name="T:RestBus.Common.SynchronizedRandom">
+            <summary>
+            Provides a synchronized (thread safe) random value generator
+            </summary>
+        </member>
+    </members>
+</doc>
