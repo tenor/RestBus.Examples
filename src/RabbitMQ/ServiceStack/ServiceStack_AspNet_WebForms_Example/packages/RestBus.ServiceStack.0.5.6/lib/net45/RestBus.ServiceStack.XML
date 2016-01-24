@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>RestBus.ServiceStack</name>
+    </assembly>
+    <members>
+        <member name="M:RestBus.ServiceStack.Cookies.AddPermanentCookie(System.String,System.String,System.Nullable{System.Boolean})">
+            <summary>
+            Sets a persistent cookie which never expires
+            </summary>
+        </member>
+        <member name="M:RestBus.ServiceStack.Cookies.AddSessionCookie(System.String,System.String,System.Nullable{System.Boolean})">
+            <summary>
+            Sets a session cookie which expires after the browser session closes
+            </summary>
+        </member>
+        <member name="M:RestBus.ServiceStack.Cookies.DeleteCookie(System.String)">
+            <summary>
+            Deletes a specified cookie by setting its value to empty and expiration to -1 days
+            </summary>
+        </member>
+        <member name="M:RestBus.ServiceStack.Cookies.AddCookie(System.Net.Cookie)">
+            <summary>
+            Sets a persistent cookie which expires after the given time
+            </summary>
+        </member>
+    </members>
+</doc>

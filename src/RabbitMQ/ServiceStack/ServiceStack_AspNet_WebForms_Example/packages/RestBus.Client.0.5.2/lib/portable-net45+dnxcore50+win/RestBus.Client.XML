@@ -1,0 +1,2369 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>RestBus.Client</name>
+    </assembly>
+    <members>
+        <member name="T:RestBus.Client.Http.Formatting.BaseJsonMediaTypeFormatter">
+            <summary>
+            Abstract <see cref="T:RestBus.Client.Http.Formatting.MediaTypeFormatter"/> class to support Bson and Json.
+            </summary>
+        </member>
+        <member name="M:RestBus.Client.Http.Formatting.BaseJsonMediaTypeFormatter.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:RestBus.Client.Http.Formatting.BaseJsonMediaTypeFormatter"/> class.
+            </summary>
+        </member>
+        <member name="M:RestBus.Client.Http.Formatting.BaseJsonMediaTypeFormatter.#ctor(RestBus.Client.Http.Formatting.BaseJsonMediaTypeFormatter)">
+            <summary>
+            Initializes a new instance of the <see cref="T:RestBus.Client.Http.Formatting.BaseJsonMediaTypeFormatter"/> class.
+            </summary>
+            <param name="formatter">The <see cref="T:RestBus.Client.Http.Formatting.BaseJsonMediaTypeFormatter"/> instance to copy settings from.</param>
+        </member>
+        <member name="P:RestBus.Client.Http.Formatting.BaseJsonMediaTypeFormatter.SerializerSettings">
+            <summary>
+            Gets or sets the <see cref="T:Newtonsoft.Json.JsonSerializerSettings"/> used to configure the <see cref="T:Newtonsoft.Json.JsonSerializer"/>.
+            </summary>
+        </member>
+        <member name="M:RestBus.Client.Http.Formatting.BaseJsonMediaTypeFormatter.CreateDefaultSerializerSettings">
+            <summary>
+            Creates a <see cref="T:Newtonsoft.Json.JsonSerializerSettings"/> instance with the default settings used by the <see cref="T:RestBus.Client.Http.Formatting.BaseJsonMediaTypeFormatter"/>.
+            </summary>
+        </member>
+        <member name="M:RestBus.Client.Http.Formatting.BaseJsonMediaTypeFormatter.CanReadType(System.Type)">
+            <summary>
+            Determines whether this <see cref="T:RestBus.Client.Http.Formatting.BaseJsonMediaTypeFormatter"/> can read objects
+            of the specified <paramref name="type"/>.
+            </summary>
+            <param name="type">The <see cref="T:System.Type"/> of object that will be read.</param>
+            <returns><c>true</c> if objects of this <paramref name="type"/> can be read, otherwise <c>false</c>.</returns>
+        </member>
+        <member name="M:RestBus.Client.Http.Formatting.BaseJsonMediaTypeFormatter.CanWriteType(System.Type)">
+            <summary>
+            Determines whether this <see cref="T:RestBus.Client.Http.Formatting.BaseJsonMediaTypeFormatter"/> can write objects
+            of the specified <paramref name="type"/>.
+            </summary>
+            <param name="type">The <see cref="T:System.Type"/> of object that will be written.</param>
+            <returns><c>true</c> if objects of this <paramref name="type"/> can be written, otherwise <c>false</c>.</returns>
+        </member>
+        <member name="M:RestBus.Client.Http.Formatting.BaseJsonMediaTypeFormatter.ReadFromStreamAsync(System.Type,System.IO.Stream,System.Net.Http.HttpContent,RestBus.Client.Http.Formatting.IFormatterLogger)">
+            <summary>
+            Called during deserialization to read an object of the specified <paramref name="type"/>
+            from the specified <paramref name="readStream"/>.
+            </summary>
+            <param name="type">The <see cref="T:System.Type"/> of object to read.</param>
+            <param name="readStream">The <see cref="T:System.IO.Stream"/> from which to read.</param>
+            <param name="content">The <see cref="T:System.Net.Http.HttpContent"/> for the content being written.</param>
+            <param name="formatterLogger">The <see cref="T:RestBus.Client.Http.Formatting.IFormatterLogger"/> to log events to.</param>
+            <returns>A <see cref="T:System.Threading.Tasks.Task"/> whose result will be the object instance that has been read.</returns>
+        </member>
+        <member name="M:RestBus.Client.Http.Formatting.BaseJsonMediaTypeFormatter.ReadFromStream(System.Type,System.IO.Stream,System.Text.Encoding,RestBus.Client.Http.Formatting.IFormatterLogger)">
+            <summary>
+            Called during deserialization to read an object of the specified <paramref name="type"/>
+            from the specified <paramref name="readStream"/>.
+            </summary>
+            <remarks>
+            Public for delegating wrappers of this class.  Expected to be called only from
+            <see cref="M:RestBus.Client.Http.Formatting.BaseJsonMediaTypeFormatter.ReadFromStreamAsync(System.Type,System.IO.Stream,System.Net.Http.HttpContent,RestBus.Client.Http.Formatting.IFormatterLogger)"/>.
+            </remarks>
+            <param name="type">The <see cref="T:System.Type"/> of object to read.</param>
+            <param name="readStream">The <see cref="T:System.IO.Stream"/> from which to read.</param>
+            <param name="effectiveEncoding">The <see cref="T:System.Text.Encoding"/> to use when reading.</param>
+            <param name="formatterLogger">The <see cref="T:RestBus.Client.Http.Formatting.IFormatterLogger"/> to log events to.</param>
+            <returns>The <see cref="T:System.Object"/> instance that has been read.</returns>
+        </member>
+        <member name="M:RestBus.Client.Http.Formatting.BaseJsonMediaTypeFormatter.CreateJsonReader(System.Type,System.IO.Stream,System.Text.Encoding)">
+            <summary>
+            Called during deserialization to get the <see cref="T:Newtonsoft.Json.JsonReader"/>.
+            </summary>
+            <remarks>
+            Public for delegating wrappers of this class.  Expected to be called only from
+            <see cref="M:RestBus.Client.Http.Formatting.BaseJsonMediaTypeFormatter.ReadFromStreamAsync(System.Type,System.IO.Stream,System.Net.Http.HttpContent,RestBus.Client.Http.Formatting.IFormatterLogger)"/>.
+            </remarks>
+            <param name="type">The <see cref="T:System.Type"/> of object to read.</param>
+            <param name="readStream">The <see cref="T:System.IO.Stream"/> from which to read.</param>
+            <param name="effectiveEncoding">The <see cref="T:System.Text.Encoding"/> to use when reading.</param>
+            <returns>The <see cref="T:Newtonsoft.Json.JsonWriter"/> used during deserialization.</returns>
+        </member>
+        <member name="M:RestBus.Client.Http.Formatting.BaseJsonMediaTypeFormatter.CreateJsonSerializer">
+            <summary>
+            Called during serialization and deserialization to get the <see cref="T:Newtonsoft.Json.JsonSerializer"/>.
+            </summary>
+            <remarks>
+            Public for delegating wrappers of this class.  Expected to be called only from
+            <see cref="M:RestBus.Client.Http.Formatting.BaseJsonMediaTypeFormatter.ReadFromStreamAsync(System.Type,System.IO.Stream,System.Net.Http.HttpContent,RestBus.Client.Http.Formatting.IFormatterLogger)"/> and <see cref="M:RestBus.Client.Http.Formatting.BaseJsonMediaTypeFormatter.WriteToStreamAsync(System.Type,System.Object,System.IO.Stream,System.Net.Http.HttpContent,System.Net.TransportContext,System.Threading.CancellationToken)"/>.
+            </remarks>
+            <returns>The <see cref="T:Newtonsoft.Json.JsonSerializer"/> used during serialization and deserialization.</returns>
+        </member>
+        <member name="M:RestBus.Client.Http.Formatting.BaseJsonMediaTypeFormatter.WriteToStreamAsync(System.Type,System.Object,System.IO.Stream,System.Net.Http.HttpContent,System.Net.TransportContext,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:RestBus.Client.Http.Formatting.BaseJsonMediaTypeFormatter.WriteToStream(System.Type,System.Object,System.IO.Stream,System.Text.Encoding)">
+            <summary>
+            Called during serialization to write an object of the specified <paramref name="type"/>
+            to the specified <paramref name="writeStream"/>.
+            </summary>
+            <remarks>
+            Public for delegating wrappers of this class.  Expected to be called only from
+            <see cref="M:RestBus.Client.Http.Formatting.BaseJsonMediaTypeFormatter.WriteToStreamAsync(System.Type,System.Object,System.IO.Stream,System.Net.Http.HttpContent,System.Net.TransportContext,System.Threading.CancellationToken)"/>.
+            </remarks>
+            <param name="type">The <see cref="T:System.Type"/> of object to write.</param>
+            <param name="value">The object to write.</param>
+            <param name="writeStream">The <see cref="T:System.IO.Stream"/> to which to write.</param>
+            <param name="effectiveEncoding">The <see cref="T:System.Text.Encoding"/> to use when writing.</param>
+        </member>
+        <member name="M:RestBus.Client.Http.Formatting.BaseJsonMediaTypeFormatter.CreateJsonWriter(System.Type,System.IO.Stream,System.Text.Encoding)">
+            <summary>
+            Called during serialization to get the <see cref="T:Newtonsoft.Json.JsonWriter"/>.
+            </summary>
+            <remarks>
+            Public for delegating wrappers of this class.  Expected to be called only from
+            <see cref="M:RestBus.Client.Http.Formatting.BaseJsonMediaTypeFormatter.WriteToStreamAsync(System.Type,System.Object,System.IO.Stream,System.Net.Http.HttpContent,System.Net.TransportContext,System.Threading.CancellationToken)"/>.
+            </remarks>
+            <param name="type">The <see cref="T:System.Type"/> of object to write.</param>
+            <param name="writeStream">The <see cref="T:System.IO.Stream"/> to which to write.</param>
+            <param name="effectiveEncoding">The <see cref="T:System.Text.Encoding"/> to use when writing.</param>
+            <returns>The <see cref="T:Newtonsoft.Json.JsonWriter"/> used during serialization.</returns>
+        </member>
+        <member name="T:RestBus.Client.Http.Formatting.CommonWebApiResources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:RestBus.Client.Http.Formatting.CommonWebApiResources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:RestBus.Client.Http.Formatting.CommonWebApiResources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:RestBus.Client.Http.Formatting.CommonWebApiResources.ArgumentInvalidAbsoluteUri">
+            <summary>
+              Looks up a localized string similar to Relative URI values are not supported: &apos;{0}&apos;. The URI must be absolute..
+            </summary>
+        </member>
+        <member name="P:RestBus.Client.Http.Formatting.CommonWebApiResources.ArgumentInvalidHttpUriScheme">
+            <summary>
+              Looks up a localized string similar to Unsupported URI scheme: &apos;{0}&apos;. The URI scheme must be either &apos;{1}&apos; or &apos;{2}&apos;..
+            </summary>
+        </member>
+        <member name="P:RestBus.Client.Http.Formatting.CommonWebApiResources.ArgumentMustBeGreaterThanOrEqualTo">
+            <summary>
+              Looks up a localized string similar to Value must be greater than or equal to {0}..
+            </summary>
+        </member>
+        <member name="P:RestBus.Client.Http.Formatting.CommonWebApiResources.ArgumentMustBeLessThanOrEqualTo">
+            <summary>
+              Looks up a localized string similar to Value must be less than or equal to {0}..
+            </summary>
+        </member>
+        <member name="P:RestBus.Client.Http.Formatting.CommonWebApiResources.ArgumentNullOrEmpty">
+            <summary>
+              Looks up a localized string similar to The argument &apos;{0}&apos; is null or empty..
+            </summary>
+        </member>
+        <member name="P:RestBus.Client.Http.Formatting.CommonWebApiResources.ArgumentUriHasQueryOrFragment">
+            <summary>
+              Looks up a localized string similar to URI must not contain a query component or a fragment identifier..
+            </summary>
+        </member>
+        <member name="P:RestBus.Client.Http.Formatting.CommonWebApiResources.InvalidEnumArgument">
+            <summary>
+              Looks up a localized string similar to The value of argument &apos;{0}&apos; ({1}) is invalid for Enum type &apos;{2}&apos;..
+            </summary>
+        </member>
+        <member name="T:RestBus.Client.Http.Formatting.DelegatingEnumerable`1">
+            <summary>
+            Helper class to serialize <see cref="T:System.Collections.Generic.IEnumerable`1"/> types by delegating them through a concrete implementation."/>.
+            </summary>
+            <typeparam name="T">The interface implementing <see cref="T:System.Collections.Generic.IEnumerable`1"/> to proxy.</typeparam>
+        </member>
+        <member name="M:RestBus.Client.Http.Formatting.DelegatingEnumerable`1.#ctor">
+            <summary>
+            Initialize a DelegatingEnumerable. This constructor is necessary for <see cref="T:System.Runtime.Serialization.DataContractSerializer"/> to work.
+            </summary>
+        </member>
+        <member name="M:RestBus.Client.Http.Formatting.DelegatingEnumerable`1.#ctor(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            Initialize a DelegatingEnumerable with an <see cref="T:System.Collections.Generic.IEnumerable`1"/>. This is a helper class to proxy <see cref="T:System.Collections.Generic.IEnumerable`1"/> interfaces for <see cref="T:System.Xml.Serialization.XmlSerializer"/>.
+            </summary>
+            <param name="source">The <see cref="T:System.Collections.Generic.IEnumerable`1"/> instance to get the enumerator from.</param>
+        </member>
+        <member name="M:RestBus.Client.Http.Formatting.DelegatingEnumerable`1.GetEnumerator">
+            <summary>
+            Get the enumerator of the associated <see cref="T:System.Collections.Generic.IEnumerable`1"/>.
+            </summary>
+            <returns>The enumerator of the <see cref="T:System.Collections.Generic.IEnumerable`1"/> source.</returns>
+        </member>
+        <member name="M:RestBus.Client.Http.Formatting.DelegatingEnumerable`1.Add(System.Object)">
+            <summary>
+            This method is not implemented but is required method for serialization to work. Do not use.
+            </summary>
+            <param name="item">The item to add. Unused.</param>
+        </member>
+        <member name="M:RestBus.Client.Http.Formatting.DelegatingEnumerable`1.System#Collections#IEnumerable#GetEnumerator">
+            <summary>
+            Get the enumerator of the associated <see cref="T:System.Collections.Generic.IEnumerable`1"/>.
+            </summary>
+            <returns>The enumerator of the <see cref="T:System.Collections.Generic.IEnumerable`1"/> source.</returns>
+        </member>
+        <member name="T:RestBus.Client.Http.Formatting.IFormatterLogger">
+            <summary>
+            Interface to log events that occur during formatter reads.
+            </summary>
+        </member>
+        <member name="M:RestBus.Client.Http.Formatting.IFormatterLogger.LogError(System.String,System.String)">
+            <summary>
+            Logs an error.
+            </summary>
+            <param name="errorPath">The path to the member for which the error is being logged.</param>
+            <param name="errorMessage">The error message to be logged.</param>
+        </member>
+        <member name="M:RestBus.Client.Http.Formatting.IFormatterLogger.LogError(System.String,System.Exception)">
+            <summary>
+            Logs an error.
+            </summary>
+            <param name="errorPath">The path to the member for which the error is being logged.</param>
+            <param name="exception">The exception to be logged.</param>
+        </member>
+        <member name="T:RestBus.Client.Http.Formatting.IRequiredMemberSelector">
+            <summary>
+            Interface to determine which data members on a particular type are required.
+            </summary>
+        </member>
+        <member name="M:RestBus.Client.Http.Formatting.IRequiredMemberSelector.IsRequiredMember(System.Reflection.MemberInfo)">
+            <summary>
+            Determines whether a given member is required on deserialization.
+            </summary>
+            <param name="member">The <see cref="T:System.Reflection.MemberInfo"/> that will be deserialized.</param>
+            <returns><c>true</c> if <paramref name="member"/> should be treated as a required member, otherwise <c>false</c>.</returns>
+        </member>
+        <member name="T:RestBus.Client.Http.Formatting.JsonMediaTypeFormatter">
+            <summary>
+            <see cref="T:RestBus.Client.Http.Formatting.MediaTypeFormatter"/> class to handle Json.
+            </summary>
+        </member>
+        <member name="M:RestBus.Client.Http.Formatting.JsonMediaTypeFormatter.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:RestBus.Client.Http.Formatting.JsonMediaTypeFormatter"/> class.
+            </summary>
+        </member>
+        <member name="M:RestBus.Client.Http.Formatting.JsonMediaTypeFormatter.#ctor(RestBus.Client.Http.Formatting.JsonMediaTypeFormatter)">
+            <summary>
+            Initializes a new instance of the <see cref="T:RestBus.Client.Http.Formatting.JsonMediaTypeFormatter"/> class.
+            </summary>
+            <param name="formatter">The <see cref="T:RestBus.Client.Http.Formatting.JsonMediaTypeFormatter"/> instance to copy settings from.</param>
+        </member>
+        <member name="P:RestBus.Client.Http.Formatting.JsonMediaTypeFormatter.DefaultMediaType">
+            <summary>
+            Gets the default media type for Json, namely "application/json".
+            </summary>
+            <remarks>
+            The default media type does not have any <c>charset</c> parameter as
+            the <see cref="T:System.Text.Encoding"/> can be configured on a per <see cref="T:RestBus.Client.Http.Formatting.JsonMediaTypeFormatter"/>
+            instance basis.
+            </remarks>
+            <value>
+            Because <see cref="T:System.Net.Http.Headers.MediaTypeHeaderValue"/> is mutable, the value
+            returned will be a new instance every time.
+            </value>
+        </member>
+        <member name="P:RestBus.Client.Http.Formatting.JsonMediaTypeFormatter.Indent">
+            <summary>
+            Gets or sets a value indicating whether to indent elements when writing data. 
+            </summary>
+        </member>
+        <member name="M:RestBus.Client.Http.Formatting.JsonMediaTypeFormatter.CreateJsonReader(System.Type,System.IO.Stream,System.Text.Encoding)">
+            <inheritdoc />
+        </member>
+        <member name="M:RestBus.Client.Http.Formatting.JsonMediaTypeFormatter.CreateJsonWriter(System.Type,System.IO.Stream,System.Text.Encoding)">
+            <inheritdoc />
+        </member>
+        <member name="T:RestBus.Client.Http.Formatting.MediaTypeConstants">
+            <summary>
+            Constants related to media types.
+            </summary>
+        </member>
+        <member name="P:RestBus.Client.Http.Formatting.MediaTypeConstants.ApplicationOctetStreamMediaType">
+            <summary>
+            Gets a <see cref="T:System.Net.Http.Headers.MediaTypeHeaderValue"/> instance representing <c>application/octet-stream</c>.
+            </summary>
+            <value>
+            A new <see cref="T:System.Net.Http.Headers.MediaTypeHeaderValue"/> instance representing <c>application/octet-stream</c>.
+            </value>
+        </member>
+        <member name="P:RestBus.Client.Http.Formatting.MediaTypeConstants.ApplicationXmlMediaType">
+            <summary>
+            Gets a <see cref="T:System.Net.Http.Headers.MediaTypeHeaderValue"/> instance representing <c>application/xml</c>.
+            </summary>
+            <value>
+            A new <see cref="T:System.Net.Http.Headers.MediaTypeHeaderValue"/> instance representing <c>application/xml</c>.
+            </value>
+        </member>
+        <member name="P:RestBus.Client.Http.Formatting.MediaTypeConstants.ApplicationJsonMediaType">
+            <summary>
+            Gets a <see cref="T:System.Net.Http.Headers.MediaTypeHeaderValue"/> instance representing <c>application/json</c>.
+            </summary>
+            <value>
+            A new <see cref="T:System.Net.Http.Headers.MediaTypeHeaderValue"/> instance representing <c>application/json</c>.
+            </value>
+        </member>
+        <member name="P:RestBus.Client.Http.Formatting.MediaTypeConstants.TextXmlMediaType">
+            <summary>
+            Gets a <see cref="T:System.Net.Http.Headers.MediaTypeHeaderValue"/> instance representing <c>text/xml</c>.
+            </summary>
+            <value>
+            A new <see cref="T:System.Net.Http.Headers.MediaTypeHeaderValue"/> instance representing <c>text/xml</c>.
+            </value>
+        </member>
+        <member name="P:RestBus.Client.Http.Formatting.MediaTypeConstants.TextJsonMediaType">
+            <summary>
+            Gets a <see cref="T:System.Net.Http.Headers.MediaTypeHeaderValue"/> instance representing <c>text/json</c>.
+            </summary>
+            <value>
+            A new <see cref="T:System.Net.Http.Headers.MediaTypeHeaderValue"/> instance representing <c>text/json</c>.
+            </value>
+        </member>
+        <member name="P:RestBus.Client.Http.Formatting.MediaTypeConstants.ApplicationFormUrlEncodedMediaType">
+            <summary>
+            Gets a <see cref="T:System.Net.Http.Headers.MediaTypeHeaderValue"/> instance representing <c>application/x-www-form-urlencoded</c>.
+            </summary>
+            <value>
+            A new <see cref="T:System.Net.Http.Headers.MediaTypeHeaderValue"/> instance representing <c>application/x-www-form-urlencoded</c>.
+            </value>
+        </member>
+        <member name="T:RestBus.Client.Http.Formatting.MediaTypeFormatter">
+            <summary>
+            Base class to handle serializing and deserializing strongly-typed objects using <see cref="T:RestBus.Client.Http.ObjectContent"/>.
+            </summary>
+        </member>
+        <member name="M:RestBus.Client.Http.Formatting.MediaTypeFormatter.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:RestBus.Client.Http.Formatting.MediaTypeFormatter"/> class.
+            </summary>
+        </member>
+        <member name="M:RestBus.Client.Http.Formatting.MediaTypeFormatter.#ctor(RestBus.Client.Http.Formatting.MediaTypeFormatter)">
+            <summary>
+            Initializes a new instance of the <see cref="T:RestBus.Client.Http.Formatting.MediaTypeFormatter"/> class.
+            </summary>
+            <param name="formatter">The <see cref="T:RestBus.Client.Http.Formatting.MediaTypeFormatter"/> instance to copy settings from.</param>
+        </member>
+        <member name="P:RestBus.Client.Http.Formatting.MediaTypeFormatter.MaxHttpCollectionKeys">
+            <summary>
+            Gets or sets the maximum number of keys stored in a NameValueCollection. 
+            </summary>
+        </member>
+        <member name="P:RestBus.Client.Http.Formatting.MediaTypeFormatter.SupportedMediaTypes">
+            <summary>
+            Gets the mutable collection of <see cref="T:System.Net.Http.Headers.MediaTypeHeaderValue"/> elements supported by
+            this <see cref="T:RestBus.Client.Http.Formatting.MediaTypeFormatter"/> instance.
+            </summary>
+        </member>
+        <member name="P:RestBus.Client.Http.Formatting.MediaTypeFormatter.SupportedEncodings">
+            <summary>
+            Gets the mutable collection of character encodings supported by
+            this <see cref="T:RestBus.Client.Http.Formatting.MediaTypeFormatter"/> instance. The encodings are
+            used when reading or writing data. 
+            </summary>
+        </member>
+        <member name="M:RestBus.Client.Http.Formatting.MediaTypeFormatter.ReadFromStreamAsync(System.Type,System.IO.Stream,System.Net.Http.HttpContent,RestBus.Client.Http.Formatting.IFormatterLogger)">
+            <summary>
+            Returns a <see cref="T:System.Threading.Tasks.Task"/> to deserialize an object of the given <paramref name="type"/> from the given <paramref name="readStream"/>
+            </summary>
+            <remarks>
+            <para>This implementation throws a <see cref="T:System.NotSupportedException"/>. Derived types should override this method if the formatter
+            supports reading.</para>
+            <para>An implementation of this method should NOT close <paramref name="readStream"/> upon completion. The stream will be closed independently when
+            the <see cref="T:System.Net.Http.HttpContent"/> instance is disposed.
+            </para>
+            </remarks>
+            <param name="type">The type of the object to deserialize.</param>
+            <param name="readStream">The <see cref="T:System.IO.Stream"/> to read.</param>
+            <param name="content">The <see cref="T:System.Net.Http.HttpContent"/> if available. It may be <c>null</c>.</param>
+            <param name="formatterLogger">The <see cref="T:RestBus.Client.Http.Formatting.IFormatterLogger"/> to log events to.</param>
+            <returns>A <see cref="T:System.Threading.Tasks.Task"/> whose result will be an object of the given type.</returns>
+            <exception cref="T:System.NotSupportedException">Derived types need to support reading.</exception>
+            <seealso cref="M:RestBus.Client.Http.Formatting.MediaTypeFormatter.CanReadType(System.Type)"/>
+        </member>
+        <member name="M:RestBus.Client.Http.Formatting.MediaTypeFormatter.ReadFromStreamAsync(System.Type,System.IO.Stream,System.Net.Http.HttpContent,RestBus.Client.Http.Formatting.IFormatterLogger,System.Threading.CancellationToken)">
+            <summary>
+            Returns a <see cref="T:System.Threading.Tasks.Task"/> to deserialize an object of the given <paramref name="type"/> from the given <paramref name="readStream"/>
+            </summary>
+            <remarks>
+            <para>This implementation throws a <see cref="T:System.NotSupportedException"/>. Derived types should override this method if the formatter
+            supports reading.</para>
+            <para>An implementation of this method should NOT close <paramref name="readStream"/> upon completion. The stream will be closed independently when
+            the <see cref="T:System.Net.Http.HttpContent"/> instance is disposed.
+            </para>
+            </remarks>
+            <param name="type">The type of the object to deserialize.</param>
+            <param name="readStream">The <see cref="T:System.IO.Stream"/> to read.</param>
+            <param name="content">The <see cref="T:System.Net.Http.HttpContent"/> if available. It may be <c>null</c>.</param>
+            <param name="formatterLogger">The <see cref="T:RestBus.Client.Http.Formatting.IFormatterLogger"/> to log events to.</param>
+            <param name="cancellationToken">The token to monitor for cancellation requests.</param>
+            <returns>A <see cref="T:System.Threading.Tasks.Task"/> whose result will be an object of the given type.</returns>
+            <exception cref="T:System.NotSupportedException">Derived types need to support reading.</exception>
+            <seealso cref="M:RestBus.Client.Http.Formatting.MediaTypeFormatter.CanReadType(System.Type)"/>
+        </member>
+        <member name="M:RestBus.Client.Http.Formatting.MediaTypeFormatter.WriteToStreamAsync(System.Type,System.Object,System.IO.Stream,System.Net.Http.HttpContent,System.Net.TransportContext)">
+            <summary>
+            Returns a <see cref="T:System.Threading.Tasks.Task"/> that serializes the given <paramref name="value"/> of the given <paramref name="type"/>
+            to the given <paramref name="writeStream"/>.
+            </summary>
+            <remarks>
+            <para>This implementation throws a <see cref="T:System.NotSupportedException"/>. Derived types should override this method if the formatter
+            supports reading.</para>
+            <para>An implementation of this method should NOT close <paramref name="writeStream"/> upon completion. The stream will be closed independently when
+            the <see cref="T:System.Net.Http.HttpContent"/> instance is disposed.
+            </para>
+            </remarks>
+            <param name="type">The type of the object to write.</param>
+            <param name="value">The object value to write.  It may be <c>null</c>.</param>
+            <param name="writeStream">The <see cref="T:System.IO.Stream"/> to which to write.</param>
+            <param name="content">The <see cref="T:System.Net.Http.HttpContent"/> if available. It may be <c>null</c>.</param>
+            <param name="transportContext">The <see cref="T:System.Net.TransportContext"/> if available. It may be <c>null</c>.</param>
+            <returns>A <see cref="T:System.Threading.Tasks.Task"/> that will perform the write.</returns>
+            <exception cref="T:System.NotSupportedException">Derived types need to support writing.</exception>
+            <seealso cref="M:RestBus.Client.Http.Formatting.MediaTypeFormatter.CanWriteType(System.Type)"/>
+        </member>
+        <member name="M:RestBus.Client.Http.Formatting.MediaTypeFormatter.WriteToStreamAsync(System.Type,System.Object,System.IO.Stream,System.Net.Http.HttpContent,System.Net.TransportContext,System.Threading.CancellationToken)">
+            <summary>
+            Returns a <see cref="T:System.Threading.Tasks.Task"/> that serializes the given <paramref name="value"/> of the given <paramref name="type"/>
+            to the given <paramref name="writeStream"/>.
+            </summary>
+            <remarks>
+            <para>This implementation throws a <see cref="T:System.NotSupportedException"/>. Derived types should override this method if the formatter
+            supports reading.</para>
+            <para>An implementation of this method should NOT close <paramref name="writeStream"/> upon completion. The stream will be closed independently when
+            the <see cref="T:System.Net.Http.HttpContent"/> instance is disposed.
+            </para>
+            </remarks>
+            <param name="type">The type of the object to write.</param>
+            <param name="value">The object value to write.  It may be <c>null</c>.</param>
+            <param name="writeStream">The <see cref="T:System.IO.Stream"/> to which to write.</param>
+            <param name="content">The <see cref="T:System.Net.Http.HttpContent"/> if available. It may be <c>null</c>.</param>
+            <param name="transportContext">The <see cref="T:System.Net.TransportContext"/> if available. It may be <c>null</c>.</param>
+            <param name="cancellationToken">The token to monitor for cancellation requests.</param>
+            <returns>A <see cref="T:System.Threading.Tasks.Task"/> that will perform the write.</returns>
+            <exception cref="T:System.NotSupportedException">Derived types need to support writing.</exception>
+            <seealso cref="M:RestBus.Client.Http.Formatting.MediaTypeFormatter.CanWriteType(System.Type)"/>
+        </member>
+        <member name="M:RestBus.Client.Http.Formatting.MediaTypeFormatter.TryGetDelegatingTypeForIEnumerableGenericOrSame(System.Type@)">
+            <summary>
+            This method converts <see cref="T:System.Collections.Generic.IEnumerable`1"/> (and interfaces that mandate it) to a <see cref="T:RestBus.Client.Http.Formatting.DelegatingEnumerable`1"/> for serialization purposes.
+            </summary>
+            <param name="type">The type to potentially be wrapped. If the type is wrapped, it's changed in place.</param>
+            <returns>Returns <c>true</c> if the type was wrapped; <c>false</c>, otherwise</returns>
+        </member>
+        <member name="M:RestBus.Client.Http.Formatting.MediaTypeFormatter.TryGetDelegatingTypeForIQueryableGenericOrSame(System.Type@)">
+            <summary>
+            This method converts <see cref="T:System.Linq.IQueryable`1"/> (and interfaces that mandate it) to a <see cref="T:RestBus.Client.Http.Formatting.DelegatingEnumerable`1"/> for serialization purposes.
+            </summary>
+            <param name="type">The type to potentially be wrapped. If the type is wrapped, it's changed in place.</param>
+            <returns>Returns <c>true</c> if the type was wrapped; <c>false</c>, otherwise</returns>
+        </member>
+        <member name="M:RestBus.Client.Http.Formatting.MediaTypeFormatter.SelectCharacterEncoding(System.Net.Http.Headers.HttpContentHeaders)">
+            <summary>
+            Determines the best <see cref="T:System.Text.Encoding"/> amongst the supported encodings
+            for reading or writing an HTTP entity body based on the provided <paramref name="contentHeaders"/>.
+            </summary>
+            <param name="contentHeaders">The content headers provided as part of the request or response.</param>
+            <returns>The <see cref="T:System.Text.Encoding"/> to use when reading the request or writing the response.</returns>
+        </member>
+        <member name="M:RestBus.Client.Http.Formatting.MediaTypeFormatter.SetDefaultContentHeaders(System.Type,System.Net.Http.Headers.HttpContentHeaders,System.Net.Http.Headers.MediaTypeHeaderValue)">
+            <summary>
+            Sets the default headers for content that will be formatted using this formatter. This method
+            is called from the <see cref="T:RestBus.Client.Http.ObjectContent"/> constructor.
+            This implementation sets the Content-Type header to the value of <paramref name="mediaType"/> if it is
+            not <c>null</c>. If it is <c>null</c> it sets the Content-Type to the default media type of this formatter.
+            If the Content-Type does not specify a charset it will set it using this formatters configured
+            <see cref="T:System.Text.Encoding"/>.
+            </summary>
+            <remarks>
+            Subclasses can override this method to set content headers such as Content-Type etc. Subclasses should
+            call the base implementation. Subclasses should treat the passed in <paramref name="mediaType"/> (if not <c>null</c>)
+            as the authoritative media type and use that as the Content-Type.
+            </remarks>
+            <param name="type">The type of the object being serialized. See <see cref="T:RestBus.Client.Http.ObjectContent"/>.</param>
+            <param name="headers">The content headers that should be configured.</param>
+            <param name="mediaType">The authoritative media type. Can be <c>null</c>.</param>
+        </member>
+        <member name="M:RestBus.Client.Http.Formatting.MediaTypeFormatter.GetPerRequestFormatterInstance(System.Type,System.Net.Http.HttpRequestMessage,System.Net.Http.Headers.MediaTypeHeaderValue)">
+            <summary>
+            Returns a specialized instance of the <see cref="T:RestBus.Client.Http.Formatting.MediaTypeFormatter"/> that can handle formatting a response for the given
+            parameters. This method is called after a formatter has been selected through content negotiation.
+            </summary>
+            <remarks>
+            The default implementation returns <c>this</c> instance. Derived classes can choose to return a new instance if
+            they need to close over any of the parameters.
+            </remarks>
+            <param name="type">The type being serialized.</param>
+            <param name="request">The request.</param>
+            <param name="mediaType">The media type chosen for the serialization. Can be <c>null</c>.</param>
+            <returns>An instance that can format a response to the given <paramref name="request"/>.</returns>
+        </member>
+        <member name="M:RestBus.Client.Http.Formatting.MediaTypeFormatter.CanReadType(System.Type)">
+            <summary>
+            Determines whether this <see cref="T:RestBus.Client.Http.Formatting.MediaTypeFormatter"/> can deserialize
+            an object of the specified type.
+            </summary>
+            <remarks>
+            Derived classes must implement this method and indicate if a type can or cannot be deserialized.
+            </remarks>
+            <param name="type">The type of object that will be deserialized.</param>
+            <returns><c>true</c> if this <see cref="T:RestBus.Client.Http.Formatting.MediaTypeFormatter"/> can deserialize an object of that type; otherwise <c>false</c>.</returns>
+        </member>
+        <member name="M:RestBus.Client.Http.Formatting.MediaTypeFormatter.CanWriteType(System.Type)">
+            <summary>
+            Determines whether this <see cref="T:RestBus.Client.Http.Formatting.MediaTypeFormatter"/> can serialize
+            an object of the specified type.
+            </summary>
+            <remarks>
+            Derived classes must implement this method and indicate if a type can or cannot be serialized.
+            </remarks>
+            <param name="type">The type of object that will be serialized.</param>
+            <returns><c>true</c> if this <see cref="T:RestBus.Client.Http.Formatting.MediaTypeFormatter"/> can serialize an object of that type; otherwise <c>false</c>.</returns>
+        </member>
+        <member name="M:RestBus.Client.Http.Formatting.MediaTypeFormatter.GetDefaultValueForType(System.Type)">
+            <summary>
+            Gets the default value for the specified type.
+            </summary>
+        </member>
+        <member name="T:RestBus.Client.Http.Formatting.MediaTypeFormatter.MediaTypeHeaderValueCollection">
+            <summary>
+            Collection class that validates it contains only <see cref="T:System.Net.Http.Headers.MediaTypeHeaderValue"/> instances
+            that are not null and not media ranges.
+            </summary>
+        </member>
+        <member name="M:RestBus.Client.Http.Formatting.MediaTypeFormatter.MediaTypeHeaderValueCollection.InsertItem(System.Int32,System.Net.Http.Headers.MediaTypeHeaderValue)">
+            <summary>
+            Inserts the <paramref name="item"/> into the collection at the specified <paramref name="index"/>.
+            </summary>
+            <param name="index">The zero-based index at which item should be inserted.</param>
+            <param name="item">The object to insert. It cannot be <c>null</c>.</param>
+        </member>
+        <member name="M:RestBus.Client.Http.Formatting.MediaTypeFormatter.MediaTypeHeaderValueCollection.SetItem(System.Int32,System.Net.Http.Headers.MediaTypeHeaderValue)">
+            <summary>
+            Replaces the element at the specified <paramref name="index"/>.
+            </summary>
+            <param name="index">The zero-based index of the item that should be replaced.</param>
+            <param name="item">The new value for the element at the specified index.  It cannot be <c>null</c>.</param>
+        </member>
+        <member name="T:RestBus.Client.Http.Formatting.MediaTypeMapping">
+            <summary>
+            An abstract base class used to create an association between <see cref="T:System.Net.Http.HttpRequestMessage"/> or 
+            <see cref="T:System.Net.Http.HttpResponseMessage"/> instances that have certain characteristics 
+            and a specific <see cref="T:System.Net.Http.Headers.MediaTypeHeaderValue"/>. 
+            </summary>
+        </member>
+        <member name="M:RestBus.Client.Http.Formatting.MediaTypeMapping.#ctor(System.Net.Http.Headers.MediaTypeHeaderValue)">
+            <summary>
+            Initializes a new instance of a <see cref="T:RestBus.Client.Http.Formatting.MediaTypeMapping"/> with the
+            given <paramref name="mediaType"/> value.
+            </summary>
+            <param name="mediaType">
+            The <see cref="T:System.Net.Http.Headers.MediaTypeHeaderValue"/> that is associated with <see cref="T:System.Net.Http.HttpRequestMessage"/> or 
+            <see cref="T:System.Net.Http.HttpResponseMessage"/> instances that have the given characteristics of the 
+            <see cref="T:RestBus.Client.Http.Formatting.MediaTypeMapping"/>.
+            </param>
+        </member>
+        <member name="M:RestBus.Client.Http.Formatting.MediaTypeMapping.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of a <see cref="T:RestBus.Client.Http.Formatting.MediaTypeMapping"/> with the
+            given <paramref name="mediaType"/> value.
+            </summary>
+            <param name="mediaType">
+            The <see cref="T:System.String"/> that is associated with <see cref="T:System.Net.Http.HttpRequestMessage"/> or 
+            <see cref="T:System.Net.Http.HttpResponseMessage"/> instances that have the given characteristics of the 
+            <see cref="T:RestBus.Client.Http.Formatting.MediaTypeMapping"/>.
+            </param>
+        </member>
+        <member name="P:RestBus.Client.Http.Formatting.MediaTypeMapping.MediaType">
+            <summary>
+            Gets the <see cref="T:System.Net.Http.Headers.MediaTypeHeaderValue"/> that is associated with <see cref="T:System.Net.Http.HttpRequestMessage"/> or 
+            <see cref="T:System.Net.Http.HttpResponseMessage"/> instances that have the given characteristics of the 
+            <see cref="T:RestBus.Client.Http.Formatting.MediaTypeMapping"/>.
+            </summary>
+        </member>
+        <member name="M:RestBus.Client.Http.Formatting.MediaTypeMapping.TryMatchMediaType(System.Net.Http.HttpRequestMessage)">
+            <summary>
+            Returns the quality of the match of the <see cref="T:System.Net.Http.Headers.MediaTypeHeaderValue"/>
+            associated with <paramref name="request"/>.
+            </summary>
+            <param name="request">
+            The <see cref="T:System.Net.Http.HttpRequestMessage"/> to evaluate for the characteristics 
+            associated with the <see cref="T:System.Net.Http.Headers.MediaTypeHeaderValue"/>
+            of the <see cref="T:RestBus.Client.Http.Formatting.MediaTypeMapping"/>.
+            </param> 
+            <returns>
+            The quality of the match. It must be between <c>0.0</c> and <c>1.0</c>.
+            A value of <c>0.0</c> signifies no match.
+            A value of <c>1.0</c> signifies a complete match.
+            </returns>
+        </member>
+        <member name="T:RestBus.Client.Http.Formatting.RequestHeaderMapping">
+            <summary>
+            This class provides a mapping from an arbitrary HTTP request header field to a <see cref="T:System.Net.Http.Headers.MediaTypeHeaderValue"/>
+            used to select <see cref="T:RestBus.Client.Http.Formatting.MediaTypeFormatter"/> instances for handling the entity body of an <see cref="T:System.Net.Http.HttpRequestMessage"/>
+            or <see cref="T:System.Net.Http.HttpResponseMessage"/>.
+            <remarks>This class only checks header fields associated with <see cref="P:System.Net.Http.HttpRequestMessage.Headers"/> for a match. It does
+            not check header fields associated with <see cref="P:System.Net.Http.HttpResponseMessage.Headers"/> or <see cref="P:System.Net.Http.HttpContent.Headers"/> instances.</remarks>
+            </summary>
+        </member>
+        <member name="M:RestBus.Client.Http.Formatting.RequestHeaderMapping.#ctor(System.String,System.String,System.StringComparison,System.Boolean,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:RestBus.Client.Http.Formatting.RequestHeaderMapping"/> class.
+            </summary>
+            <param name="headerName">Name of the header to match.</param>
+            <param name="headerValue">The header value to match.</param>
+            <param name="valueComparison">The value comparison to use when matching <paramref name="headerValue"/>.</param>
+            <param name="isValueSubstring">if set to <c>true</c> then <paramref name="headerValue"/> is 
+            considered a match if it matches a substring of the actual header value.</param>
+            <param name="mediaType">The media type to use if <paramref name="headerName"/> and <paramref name="headerValue"/> 
+            is considered a match.</param>
+        </member>
+        <member name="M:RestBus.Client.Http.Formatting.RequestHeaderMapping.#ctor(System.String,System.String,System.StringComparison,System.Boolean,System.Net.Http.Headers.MediaTypeHeaderValue)">
+            <summary>
+            Initializes a new instance of the <see cref="T:RestBus.Client.Http.Formatting.RequestHeaderMapping"/> class.
+            </summary>
+            <param name="headerName">Name of the header to match.</param>
+            <param name="headerValue">The header value to match.</param>
+            <param name="valueComparison">The <see cref="T:System.StringComparison"/> to use when matching <paramref name="headerValue"/>.</param>
+            <param name="isValueSubstring">if set to <c>true</c> then <paramref name="headerValue"/> is 
+            considered a match if it matches a substring of the actual header value.</param>
+            <param name="mediaType">The <see cref="T:System.Net.Http.Headers.MediaTypeHeaderValue"/> to use if <paramref name="headerName"/> and <paramref name="headerValue"/> 
+            is considered a match.</param>
+        </member>
+        <member name="P:RestBus.Client.Http.Formatting.RequestHeaderMapping.HeaderName">
+            <summary>
+            Gets the name of the header to match.
+            </summary>
+        </member>
+        <member name="P:RestBus.Client.Http.Formatting.RequestHeaderMapping.HeaderValue">
+            <summary>
+            Gets the header value to match.
+            </summary>
+        </member>
+        <member name="P:RestBus.Client.Http.Formatting.RequestHeaderMapping.HeaderValueComparison">
+            <summary>
+            Gets the <see cref="T:System.StringComparison"/> to use when matching <see cref="P:RestBus.Client.Http.Formatting.RequestHeaderMapping.HeaderValue"/>.
+            </summary>
+        </member>
+        <member name="P:RestBus.Client.Http.Formatting.RequestHeaderMapping.IsValueSubstring">
+            <summary>
+            Gets a value indicating whether <see cref="P:RestBus.Client.Http.Formatting.RequestHeaderMapping.HeaderValue"/> is 
+            a matched as a substring of the actual header value.
+            this instance is value substring.
+            </summary>
+            <value>
+            <c>true</c> if <see cref="P:RestBus.Client.Http.Formatting.RequestHeaderMapping.HeaderValue"/> is to be matched as a substring; otherwise <c>false</c>.
+            </value>
+        </member>
+        <member name="M:RestBus.Client.Http.Formatting.RequestHeaderMapping.TryMatchMediaType(System.Net.Http.HttpRequestMessage)">
+            <summary>
+            Returns a value indicating whether the current <see cref="T:RestBus.Client.Http.Formatting.RequestHeaderMapping"/>
+            instance can return a <see cref="T:System.Net.Http.Headers.MediaTypeHeaderValue"/> from <paramref name="request"/>.
+            </summary>
+            <param name="request">The <see cref="T:System.Net.Http.HttpRequestMessage"/> to check.</param>
+            <returns>
+            The quality of the match. It must be between <c>0.0</c> and <c>1.0</c>.
+            A value of <c>0.0</c> signifies no match.
+            A value of <c>1.0</c> signifies a complete match.
+            </returns>
+        </member>
+        <member name="T:RestBus.Client.Http.Formatting.StringComparisonHelper">
+            <summary>
+            Helper class for validating <see cref="T:System.StringComparison"/> values.
+            </summary>
+        </member>
+        <member name="M:RestBus.Client.Http.Formatting.StringComparisonHelper.IsDefined(System.StringComparison)">
+            <summary>
+            Determines whether the specified <paramref name="value"/> is defined by the <see cref="T:System.StringComparison"/>
+            enumeration.
+            </summary>
+            <param name="value">The value to verify.</param>
+            <returns>
+            <c>true</c> if the specified options is defined; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:RestBus.Client.Http.Formatting.StringComparisonHelper.Validate(System.StringComparison,System.String)">
+            <summary>
+            Validates the specified <paramref name="value"/> and throws an <see cref="T:System.ArgumentException"/>
+            exception if not valid.
+            </summary>
+            <param name="value">The value to validate.</param>
+            <param name="parameterName">Name of the parameter to use if throwing exception.</param>
+        </member>
+        <member name="T:RestBus.Client.Http.Formatting.XmlHttpRequestHeaderMapping">
+            <summary>
+            A <see cref="T:RestBus.Client.Http.Formatting.RequestHeaderMapping"/> that maps the X-Requested-With http header field set by AJAX XmlHttpRequest (XHR)
+            to the media type <c>application/json</c> if no explicit Accept header fields are present in the request.
+            </summary>
+        </member>
+        <member name="M:RestBus.Client.Http.Formatting.XmlHttpRequestHeaderMapping.#ctor">
+            <summary>
+            Initializes a new instance of <see cref="T:RestBus.Client.Http.Formatting.XmlHttpRequestHeaderMapping" /> class
+            </summary>
+        </member>
+        <member name="M:RestBus.Client.Http.Formatting.XmlHttpRequestHeaderMapping.TryMatchMediaType(System.Net.Http.HttpRequestMessage)">
+            <summary>
+            Returns a value indicating whether the current <see cref="T:RestBus.Client.Http.Formatting.RequestHeaderMapping"/>
+            instance can return a <see cref="T:System.Net.Http.Headers.MediaTypeHeaderValue"/> from <paramref name="request"/>.
+            </summary>
+            <param name="request">The <see cref="T:System.Net.Http.HttpRequestMessage"/> to check.</param>
+            <returns>
+            The quality of the match.
+            A value of <c>0.0</c> signifies no match.
+            A value of <c>1.0</c> signifies a complete match and that the request was made using XmlHttpRequest without an Accept header.
+            </returns>
+        </member>
+        <member name="T:RestBus.Client.Http.Formatting.XmlMediaTypeFormatter">
+            <summary>
+            <see cref="T:RestBus.Client.Http.Formatting.MediaTypeFormatter"/> class to handle Xml.
+            </summary>
+        </member>
+        <member name="M:RestBus.Client.Http.Formatting.XmlMediaTypeFormatter.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:RestBus.Client.Http.Formatting.XmlMediaTypeFormatter"/> class.
+            </summary>
+        </member>
+        <member name="M:RestBus.Client.Http.Formatting.XmlMediaTypeFormatter.#ctor(RestBus.Client.Http.Formatting.XmlMediaTypeFormatter)">
+            <summary>
+            Initializes a new instance of the <see cref="T:RestBus.Client.Http.Formatting.XmlMediaTypeFormatter"/> class.
+            </summary>
+            <param name="formatter">The <see cref="T:RestBus.Client.Http.Formatting.XmlMediaTypeFormatter"/> instance to copy settings from.</param>
+        </member>
+        <member name="P:RestBus.Client.Http.Formatting.XmlMediaTypeFormatter.DefaultMediaType">
+            <summary>
+            Gets the default media type for xml, namely "application/xml".
+            </summary>
+            <value>
+            <remarks>
+            The default media type does not have any <c>charset</c> parameter as 
+            the <see cref="T:System.Text.Encoding"/> can be configured on a per <see cref="T:RestBus.Client.Http.Formatting.XmlMediaTypeFormatter"/> 
+            instance basis.
+            </remarks>
+            Because <see cref="T:System.Net.Http.Headers.MediaTypeHeaderValue"/> is mutable, the value
+            returned will be a new instance every time.
+            </value>
+        </member>
+        <member name="P:RestBus.Client.Http.Formatting.XmlMediaTypeFormatter.UseXmlSerializer">
+            <summary>
+            Gets or sets a value indicating whether to use <see cref="T:System.Xml.Serialization.XmlSerializer"/> instead of <see cref="T:System.Runtime.Serialization.DataContractSerializer"/> by default.
+            </summary>
+            <value>
+                <c>true</c> if use <see cref="T:System.Xml.Serialization.XmlSerializer"/> by default; otherwise, <c>false</c>. The default is <c>false</c>.
+            </value>
+        </member>
+        <member name="P:RestBus.Client.Http.Formatting.XmlMediaTypeFormatter.Indent">
+            <summary>
+            Gets or sets a value indicating whether to indent elements when writing data. 
+            </summary>
+        </member>
+        <member name="P:RestBus.Client.Http.Formatting.XmlMediaTypeFormatter.WriterSettings">
+            <summary>
+            Gets the <see cref="T:System.Xml.XmlWriterSettings"/> to be used while writing.
+            </summary>
+        </member>
+        <member name="M:RestBus.Client.Http.Formatting.XmlMediaTypeFormatter.SetSerializer(System.Type,System.Runtime.Serialization.XmlObjectSerializer)">
+            <summary>
+            Registers the <see cref="T:System.Runtime.Serialization.XmlObjectSerializer"/> to use to read or write
+            the specified <paramref name="type"/>.
+            </summary>
+            <param name="type">The type of object that will be serialized or deserialized with <paramref name="serializer"/>.</param>
+            <param name="serializer">The <see cref="T:System.Runtime.Serialization.XmlObjectSerializer"/> instance to use.</param>
+        </member>
+        <member name="M:RestBus.Client.Http.Formatting.XmlMediaTypeFormatter.SetSerializer``1(System.Runtime.Serialization.XmlObjectSerializer)">
+            <summary>
+            Registers the <see cref="T:System.Runtime.Serialization.XmlObjectSerializer"/> to use to read or write
+            the specified <typeparamref name="T"/> type.
+            </summary>
+            <typeparam name="T">The type of object that will be serialized or deserialized with <paramref name="serializer"/>.</typeparam>
+            <param name="serializer">The <see cref="T:System.Runtime.Serialization.XmlObjectSerializer"/> instance to use.</param>
+        </member>
+        <member name="M:RestBus.Client.Http.Formatting.XmlMediaTypeFormatter.SetSerializer(System.Type,System.Xml.Serialization.XmlSerializer)">
+            <summary>
+            Registers the <see cref="T:System.Xml.Serialization.XmlSerializer"/> to use to read or write
+            the specified <paramref name="type"/>.
+            </summary>
+            <param name="type">The type of objects for which <paramref name="serializer"/> will be used.</param>
+            <param name="serializer">The <see cref="T:System.Xml.Serialization.XmlSerializer"/> instance to use.</param>
+        </member>
+        <member name="M:RestBus.Client.Http.Formatting.XmlMediaTypeFormatter.SetSerializer``1(System.Xml.Serialization.XmlSerializer)">
+            <summary>
+            Registers the <see cref="T:System.Xml.Serialization.XmlSerializer"/> to use to read or write
+            the specified <typeparamref name="T"/> type.
+            </summary>
+            <typeparam name="T">The type of object that will be serialized or deserialized with <paramref name="serializer"/>.</typeparam>
+            <param name="serializer">The <see cref="T:System.Xml.Serialization.XmlSerializer"/> instance to use.</param>
+        </member>
+        <member name="M:RestBus.Client.Http.Formatting.XmlMediaTypeFormatter.RemoveSerializer(System.Type)">
+            <summary>
+            Unregisters the serializer currently associated with the given <paramref name="type"/>.
+            </summary>
+            <remarks>
+            Unless another serializer is registered for the <paramref name="type"/>, a default one will be created.
+            </remarks>
+            <param name="type">The type of object whose serializer should be removed.</param>
+            <returns><c>true</c> if a serializer was registered for the <paramref name="type"/>; otherwise <c>false</c>.</returns>
+        </member>
+        <member name="M:RestBus.Client.Http.Formatting.XmlMediaTypeFormatter.CanReadType(System.Type)">
+            <summary>
+            Determines whether this <see cref="T:RestBus.Client.Http.Formatting.XmlMediaTypeFormatter"/> can read objects
+            of the specified <paramref name="type"/>.
+            </summary>
+            <param name="type">The type of object that will be read.</param>
+            <returns><c>true</c> if objects of this <paramref name="type"/> can be read, otherwise <c>false</c>.</returns>
+        </member>
+        <member name="M:RestBus.Client.Http.Formatting.XmlMediaTypeFormatter.CanWriteType(System.Type)">
+            <summary>
+            Determines whether this <see cref="T:RestBus.Client.Http.Formatting.XmlMediaTypeFormatter"/> can write objects
+            of the specified <paramref name="type"/>.
+            </summary>
+            <param name="type">The type of object that will be written.</param>
+            <returns><c>true</c> if objects of this <paramref name="type"/> can be written, otherwise <c>false</c>.</returns>
+        </member>
+        <member name="M:RestBus.Client.Http.Formatting.XmlMediaTypeFormatter.ReadFromStreamAsync(System.Type,System.IO.Stream,System.Net.Http.HttpContent,RestBus.Client.Http.Formatting.IFormatterLogger)">
+            <summary>
+            Called during deserialization to read an object of the specified <paramref name="type"/>
+            from the specified <paramref name="readStream"/>.
+            </summary>
+            <param name="type">The type of object to read.</param>
+            <param name="readStream">The <see cref="T:System.IO.Stream"/> from which to read.</param>
+            <param name="content">The <see cref="T:System.Net.Http.HttpContent"/> for the content being read.</param>
+            <param name="formatterLogger">The <see cref="T:RestBus.Client.Http.Formatting.IFormatterLogger"/> to log events to.</param>
+            <returns>A <see cref="T:System.Threading.Tasks.Task"/> whose result will be the object instance that has been read.</returns>
+        </member>
+        <member name="M:RestBus.Client.Http.Formatting.XmlMediaTypeFormatter.GetDeserializer(System.Type,System.Net.Http.HttpContent)">
+            <summary>
+            Called during deserialization to get the XML serializer to use for deserializing objects.
+            </summary>
+            <param name="type">The type of object to deserialize.</param>
+            <param name="content">The <see cref="T:System.Net.Http.HttpContent"/> for the content being read.</param>
+            <returns>An instance of <see cref="T:System.Runtime.Serialization.XmlObjectSerializer"/> or <see cref="T:System.Xml.Serialization.XmlSerializer"/> to use for deserializing the object.</returns>
+        </member>
+        <member name="M:RestBus.Client.Http.Formatting.XmlMediaTypeFormatter.CreateXmlReader(System.IO.Stream,System.Net.Http.HttpContent)">
+            <summary>
+            Called during deserialization to get the XML reader to use for reading objects from the stream.
+            </summary>
+            <param name="readStream">The <see cref="T:System.IO.Stream"/> to read from.</param>
+            <param name="content">The <see cref="T:System.Net.Http.HttpContent"/> for the content being read.</param>
+            <returns>The <see cref="T:System.Xml.XmlReader"/> to use for reading objects.</returns>
+        </member>
+        <member name="M:RestBus.Client.Http.Formatting.XmlMediaTypeFormatter.WriteToStreamAsync(System.Type,System.Object,System.IO.Stream,System.Net.Http.HttpContent,System.Net.TransportContext,System.Threading.CancellationToken)">
+            <inheritdoc/>
+        </member>
+        <member name="M:RestBus.Client.Http.Formatting.XmlMediaTypeFormatter.GetSerializer(System.Type,System.Object,System.Net.Http.HttpContent)">
+            <summary>
+            Called during serialization to get the XML serializer to use for serializing objects.
+            </summary>
+            <param name="type">The type of object to serialize.</param>
+            <param name="value">The object to serialize.</param>
+            <param name="content">The <see cref="T:System.Net.Http.HttpContent"/> for the content being written.</param>
+            <returns>An instance of <see cref="T:System.Runtime.Serialization.XmlObjectSerializer"/> or <see cref="T:System.Xml.Serialization.XmlSerializer"/> to use for serializing the object.</returns>
+        </member>
+        <member name="M:RestBus.Client.Http.Formatting.XmlMediaTypeFormatter.CreateXmlWriter(System.IO.Stream,System.Net.Http.HttpContent)">
+            <summary>
+            Called during serialization to get the XML writer to use for writing objects to the stream.
+            </summary>
+            <param name="writeStream">The <see cref="T:System.IO.Stream"/> to write to.</param>
+            <param name="content">The <see cref="T:System.Net.Http.HttpContent"/> for the content being written.</param>
+            <returns>The <see cref="T:System.Xml.XmlWriter"/> to use for writing objects.</returns>
+        </member>
+        <member name="M:RestBus.Client.Http.Formatting.XmlMediaTypeFormatter.CreateXmlSerializer(System.Type)">
+            <summary>
+            Called during deserialization to get the XML serializer.
+            </summary>
+            <param name="type">The type of object that will be serialized or deserialized.</param>
+            <returns>The <see cref="T:System.Xml.Serialization.XmlSerializer"/> used to serialize the object.</returns>
+        </member>
+        <member name="M:RestBus.Client.Http.Formatting.XmlMediaTypeFormatter.CreateDataContractSerializer(System.Type)">
+            <summary>
+            Called during deserialization to get the DataContractSerializer serializer.
+            </summary>
+            <param name="type">The type of object that will be serialized or deserialized.</param>
+            <returns>The <see cref="T:System.Runtime.Serialization.DataContractSerializer"/> used to serialize the object.</returns>
+        </member>
+        <member name="M:RestBus.Client.Http.Formatting.XmlMediaTypeFormatter.InvokeCreateXmlReader(System.IO.Stream,System.Net.Http.HttpContent)">
+            <summary>
+            This method is to support infrastructure and is not intended to be used directly from your code.
+            </summary>
+        </member>
+        <member name="M:RestBus.Client.Http.Formatting.XmlMediaTypeFormatter.InvokeCreateXmlWriter(System.IO.Stream,System.Net.Http.HttpContent)">
+            <summary>
+            This method is to support infrastructure and is not intended to be used directly from your code.
+            </summary>
+        </member>
+        <member name="M:RestBus.Client.Http.Formatting.XmlMediaTypeFormatter.InvokeGetDeserializer(System.Type,System.Net.Http.HttpContent)">
+            <summary>
+            This method is to support infrastructure and is not intended to be used directly from your code.
+            </summary>
+        </member>
+        <member name="M:RestBus.Client.Http.Formatting.XmlMediaTypeFormatter.InvokeGetSerializer(System.Type,System.Object,System.Net.Http.HttpContent)">
+            <summary>
+            This method is to support infrastructure and is not intended to be used directly from your code.
+            </summary>
+        </member>
+        <member name="T:RestBus.Client.Http.Internal.DelegatingStream">
+            <summary>
+            Stream that delegates to inner stream. 
+            This is taken from System.Net.Http
+            </summary>
+        </member>
+        <member name="T:RestBus.Client.Http.Internal.ReadOnlyStreamWithEncodingPreamble">
+            <summary>
+            This implements a read-only, forward-only stream around another readable stream, to ensure
+            that there is an appropriate encoding preamble in the stream.
+            </summary>
+        </member>
+        <member name="T:RestBus.Client.Http.Error">
+            <summary>
+            Utility class for creating and unwrapping <see cref="T:System.Exception"/> instances.
+            </summary>
+        </member>
+        <member name="M:RestBus.Client.Http.Error.Format(System.String,System.Object[])">
+            <summary>
+            Formats the specified resource string using <see cref="M:CultureInfo.CurrentCulture"/>.
+            </summary>
+            <param name="format">A composite format string.</param>
+            <param name="args">An object array that contains zero or more objects to format.</param>
+            <returns>The formatted string.</returns>
+        </member>
+        <member name="M:RestBus.Client.Http.Error.Argument(System.String,System.Object[])">
+            <summary>
+            Creates an <see cref="T:System.ArgumentException"/> with the provided properties.
+            </summary>
+            <param name="messageFormat">A composite format string explaining the reason for the exception.</param>
+            <param name="messageArgs">An object array that contains zero or more objects to format.</param>
+            <returns>The logged <see cref="T:System.Exception"/>.</returns>
+        </member>
+        <member name="M:RestBus.Client.Http.Error.Argument(System.String,System.String,System.Object[])">
+            <summary>
+            Creates an <see cref="T:System.ArgumentException"/> with the provided properties.
+            </summary>
+            <param name="parameterName">The name of the parameter that caused the current exception.</param>
+            <param name="messageFormat">A composite format string explaining the reason for the exception.</param>
+            <param name="messageArgs">An object array that contains zero or more objects to format.</param>
+            <returns>The logged <see cref="T:System.Exception"/>.</returns>
+        </member>
+        <member name="M:RestBus.Client.Http.Error.ArgumentUriNotHttpOrHttpsScheme(System.String,System.Uri)">
+            <summary>
+            Creates an <see cref="T:System.ArgumentException"/> with a message saying that the argument must be an "http" or "https" URI.
+            </summary>
+            <param name="parameterName">The name of the parameter that caused the current exception.</param>
+            <param name="actualValue">The value of the argument that causes this exception.</param>
+            <returns>The logged <see cref="T:System.Exception"/>.</returns>
+        </member>
+        <member name="M:RestBus.Client.Http.Error.ArgumentUriNotAbsolute(System.String,System.Uri)">
+            <summary>
+            Creates an <see cref="T:System.ArgumentException"/> with a message saying that the argument must be an absolute URI.
+            </summary>
+            <param name="parameterName">The name of the parameter that caused the current exception.</param>
+            <param name="actualValue">The value of the argument that causes this exception.</param>
+            <returns>The logged <see cref="T:System.Exception"/>.</returns>
+        </member>
+        <member name="M:RestBus.Client.Http.Error.ArgumentUriHasQueryOrFragment(System.String,System.Uri)">
+            <summary>
+            Creates an <see cref="T:System.ArgumentException"/> with a message saying that the argument must be an absolute URI 
+            without a query or fragment identifier and then logs it with <see cref="F:TraceLevel.Error"/>.
+            </summary>
+            <param name="parameterName">The name of the parameter that caused the current exception.</param>
+            <param name="actualValue">The value of the argument that causes this exception.</param>
+            <returns>The logged <see cref="T:System.Exception"/>.</returns>
+        </member>
+        <member name="M:RestBus.Client.Http.Error.PropertyNull">
+            <summary>
+            Creates an <see cref="T:System.ArgumentNullException"/> with the provided properties.
+            </summary>
+            <returns>The logged <see cref="T:System.Exception"/>.</returns>
+        </member>
+        <member name="M:RestBus.Client.Http.Error.ArgumentNull(System.String)">
+            <summary>
+            Creates an <see cref="T:System.ArgumentNullException"/> with the provided properties.
+            </summary>
+            <param name="parameterName">The name of the parameter that caused the current exception.</param>
+            <returns>The logged <see cref="T:System.Exception"/>.</returns>
+        </member>
+        <member name="M:RestBus.Client.Http.Error.ArgumentNull(System.String,System.String,System.Object[])">
+            <summary>
+            Creates an <see cref="T:System.ArgumentNullException"/> with the provided properties.
+            </summary>
+            <param name="parameterName">The name of the parameter that caused the current exception.</param>
+            <param name="messageFormat">A composite format string explaining the reason for the exception.</param>
+            <param name="messageArgs">An object array that contains zero or more objects to format.</param>
+            <returns>The logged <see cref="T:System.Exception"/>.</returns>
+        </member>
+        <member name="M:RestBus.Client.Http.Error.ArgumentNullOrEmpty(System.String)">
+            <summary>
+            Creates an <see cref="T:System.ArgumentException"/> with a default message.
+            </summary>
+            <param name="parameterName">The name of the parameter that caused the current exception.</param>
+            <returns>The logged <see cref="T:System.Exception"/>.</returns>
+        </member>
+        <member name="M:RestBus.Client.Http.Error.ArgumentOutOfRange(System.String,System.Object,System.String,System.Object[])">
+            <summary>
+            Creates an <see cref="T:System.ArgumentOutOfRangeException"/> with the provided properties.
+            </summary>
+            <param name="parameterName">The name of the parameter that caused the current exception.</param>
+            <param name="actualValue">The value of the argument that causes this exception.</param>
+            <param name="messageFormat">A composite format string explaining the reason for the exception.</param>
+            <param name="messageArgs">An object array that contains zero or more objects to format.</param>
+            <returns>The logged <see cref="T:System.Exception"/>.</returns>
+        </member>
+        <member name="M:RestBus.Client.Http.Error.ArgumentMustBeGreaterThanOrEqualTo(System.String,System.Object,System.Object)">
+            <summary>
+            Creates an <see cref="T:System.ArgumentOutOfRangeException"/> with a message saying that the argument must be greater than or equal to <paramref name="minValue"/>.
+            </summary>
+            <param name="parameterName">The name of the parameter that caused the current exception.</param>
+            <param name="actualValue">The value of the argument that causes this exception.</param>
+            <param name="minValue">The minimum size of the argument.</param>
+            <returns>The logged <see cref="T:System.Exception"/>.</returns>
+        </member>
+        <member name="M:RestBus.Client.Http.Error.ArgumentMustBeLessThanOrEqualTo(System.String,System.Object,System.Object)">
+            <summary>
+            Creates an <see cref="T:System.ArgumentOutOfRangeException"/> with a message saying that the argument must be less than or equal to <paramref name="maxValue"/>.
+            </summary>
+            <param name="parameterName">The name of the parameter that caused the current exception.</param>
+            <param name="actualValue">The value of the argument that causes this exception.</param>
+            <param name="maxValue">The maximum size of the argument.</param>
+            <returns>The logged <see cref="T:System.Exception"/>.</returns>
+        </member>
+        <member name="M:RestBus.Client.Http.Error.KeyNotFound">
+            <summary>
+            Creates an <see cref="T:System.Collections.Generic.KeyNotFoundException"/> with a message saying that the key was not found.
+            </summary>
+            <returns>The logged <see cref="T:System.Exception"/>.</returns>
+        </member>
+        <member name="M:RestBus.Client.Http.Error.KeyNotFound(System.String,System.Object[])">
+            <summary>
+            Creates an <see cref="T:System.Collections.Generic.KeyNotFoundException"/> with a message saying that the key was not found.
+            </summary>
+            <param name="messageFormat">A composite format string explaining the reason for the exception.</param>
+            <param name="messageArgs">An object array that contains zero or more objects to format.</param>
+            <returns>The logged <see cref="T:System.Exception"/>.</returns>
+        </member>
+        <member name="M:RestBus.Client.Http.Error.ObjectDisposed(System.String,System.Object[])">
+            <summary>
+            Creates an <see cref="T:System.ObjectDisposedException"/> initialized according to guidelines.
+            </summary>
+            <param name="messageFormat">A composite format string explaining the reason for the exception.</param>
+            <param name="messageArgs">An object array that contains zero or more objects to format.</param>
+            <returns>The logged <see cref="T:System.Exception"/>.</returns>
+        </member>
+        <member name="M:RestBus.Client.Http.Error.OperationCanceled">
+            <summary>
+            Creates an <see cref="T:System.OperationCanceledException"/> initialized with the provided parameters.
+            </summary>
+            <returns>The logged <see cref="T:System.Exception"/>.</returns>
+        </member>
+        <member name="M:RestBus.Client.Http.Error.OperationCanceled(System.String,System.Object[])">
+            <summary>
+            Creates an <see cref="T:System.OperationCanceledException"/> initialized with the provided parameters.
+            </summary>
+            <param name="messageFormat">A composite format string explaining the reason for the exception.</param>
+            <param name="messageArgs">An object array that contains zero or more objects to format.</param>
+            <returns>The logged <see cref="T:System.Exception"/>.</returns>
+        </member>
+        <member name="M:RestBus.Client.Http.Error.InvalidEnumArgument(System.String,System.Int32,System.Type)">
+            <summary>
+            Creates an <see cref="T:System.ArgumentException"/> for an invalid enum argument.
+            </summary>
+            <param name="parameterName">The name of the parameter that caused the current exception.</param>
+            <param name="invalidValue">The value of the argument that failed.</param>
+            <param name="enumClass">A <see cref="T:System.Type"/> that represents the enumeration class with the valid values.</param>
+            <returns>The logged <see cref="T:System.Exception"/>.</returns>
+        </member>
+        <member name="M:RestBus.Client.Http.Error.InvalidOperation(System.String,System.Object[])">
+            <summary>
+            Creates an <see cref="T:System.InvalidOperationException"/>.
+            </summary>
+            <param name="messageFormat">A composite format string explaining the reason for the exception.</param>
+            <param name="messageArgs">An object array that contains zero or more objects to format.</param>
+            <returns>The logged <see cref="T:System.Exception"/>.</returns>
+        </member>
+        <member name="M:RestBus.Client.Http.Error.InvalidOperation(System.Exception,System.String,System.Object[])">
+            <summary>
+            Creates an <see cref="T:System.InvalidOperationException"/>.
+            </summary>
+            <param name="innerException">Inner exception</param>
+            <param name="messageFormat">A composite format string explaining the reason for the exception.</param>
+            <param name="messageArgs">An object array that contains zero or more objects to format.</param>
+            <returns>The logged <see cref="T:System.Exception"/>.</returns>
+        </member>
+        <member name="M:RestBus.Client.Http.Error.NotSupported(System.String,System.Object[])">
+            <summary>
+            Creates an <see cref="T:System.NotSupportedException"/>.
+            </summary>
+            <param name="messageFormat">A composite format string explaining the reason for the exception.</param>
+            <param name="messageArgs">An object array that contains zero or more objects to format.</param>
+            <returns>The logged <see cref="T:System.Exception"/>.</returns>
+        </member>
+        <member name="T:RestBus.Client.Http.FormattingUtilities">
+            <summary>
+            Provides various internal utility functions
+            </summary>
+        </member>
+        <member name="F:RestBus.Client.Http.FormattingUtilities.Match">
+            <summary>
+            Quality factor to indicate a perfect match.
+            </summary>
+        </member>
+        <member name="F:RestBus.Client.Http.FormattingUtilities.NoMatch">
+            <summary>
+            Quality factor to indicate no match.
+            </summary>
+        </member>
+        <member name="F:RestBus.Client.Http.FormattingUtilities.DefaultMaxDepth">
+            <summary>
+            The default max depth for our formatter is 256
+            </summary>
+        </member>
+        <member name="F:RestBus.Client.Http.FormattingUtilities.DefaultMinDepth">
+            <summary>
+            The default min depth for our formatter is 1
+            </summary>
+        </member>
+        <member name="F:RestBus.Client.Http.FormattingUtilities.HttpRequestedWithHeader">
+            <summary>
+            HTTP X-Requested-With header field name
+            </summary>
+        </member>
+        <member name="F:RestBus.Client.Http.FormattingUtilities.HttpRequestedWithHeaderValue">
+            <summary>
+            HTTP X-Requested-With header field value
+            </summary>
+        </member>
+        <member name="F:RestBus.Client.Http.FormattingUtilities.HttpHostHeader">
+            <summary>
+            HTTP Host header field name
+            </summary>
+        </member>
+        <member name="F:RestBus.Client.Http.FormattingUtilities.HttpVersionToken">
+            <summary>
+            HTTP Version token
+            </summary>
+        </member>
+        <member name="F:RestBus.Client.Http.FormattingUtilities.HttpRequestMessageType">
+            <summary>
+            A <see cref="T:System.Type"/> representing <see cref="T:System.Net.Http.HttpRequestMessage"/>.
+            </summary>
+        </member>
+        <member name="F:RestBus.Client.Http.FormattingUtilities.HttpResponseMessageType">
+            <summary>
+            A <see cref="T:System.Type"/> representing <see cref="T:System.Net.Http.HttpResponseMessage"/>.
+            </summary>
+        </member>
+        <member name="F:RestBus.Client.Http.FormattingUtilities.HttpContentType">
+            <summary>
+            A <see cref="T:System.Type"/> representing <see cref="T:System.Net.Http.HttpContent"/>.
+            </summary>
+        </member>
+        <member name="F:RestBus.Client.Http.FormattingUtilities.DelegatingEnumerableGenericType">
+            <summary>
+            A <see cref="T:System.Type"/> representing <see cref="T:RestBus.Client.Http.Formatting.DelegatingEnumerable`1"/>.
+            </summary>
+        </member>
+        <member name="F:RestBus.Client.Http.FormattingUtilities.EnumerableInterfaceGenericType">
+            <summary>
+            A <see cref="T:System.Type"/> representing <see cref="T:System.Collections.Generic.IEnumerable`1"/>.
+            </summary>
+        </member>
+        <member name="F:RestBus.Client.Http.FormattingUtilities.QueryableInterfaceGenericType">
+            <summary>
+            A <see cref="T:System.Type"/> representing <see cref="T:System.Linq.IQueryable`1"/>.
+            </summary>
+        </member>
+        <member name="M:RestBus.Client.Http.FormattingUtilities.IsJTokenType(System.Type)">
+            <summary>
+            Determines whether <paramref name="type"/> is a <see cref="T:Newtonsoft.Json.Linq.JToken"/> type.
+            </summary>
+            <param name="type">The type to test.</param>
+            <returns>
+              <c>true</c> if <paramref name="type"/> is a <see cref="T:Newtonsoft.Json.Linq.JToken"/> type; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:RestBus.Client.Http.FormattingUtilities.CreateEmptyContentHeaders">
+            <summary>
+            Creates an empty <see cref="T:System.Net.Http.Headers.HttpContentHeaders"/> instance. The only way is to get it from a dummy 
+            <see cref="T:System.Net.Http.HttpContent"/> instance.
+            </summary>
+            <returns>The created instance.</returns>
+        </member>
+        <member name="M:RestBus.Client.Http.FormattingUtilities.CreateDefaultReaderQuotas">
+            <summary>
+            Create a default reader quotas with a default depth quota of 1K
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:RestBus.Client.Http.FormattingUtilities.UnquoteToken(System.String)">
+            <summary>
+            Remove bounding quotes on a token if present
+            </summary>
+            <param name="token">Token to unquote.</param>
+            <returns>Unquoted token.</returns>
+        </member>
+        <member name="M:RestBus.Client.Http.FormattingUtilities.TryParseInt32(System.String,System.Int32@)">
+            <summary>
+            Parses valid integer strings with no leading signs, whitespace or other <see cref="T:System.Globalization.NumberStyles"/>
+            </summary>
+            <param name="value">The value to parse</param>
+            <param name="result">The result</param>
+            <returns>True if value was valid; false otherwise.</returns>
+        </member>
+        <member name="T:RestBus.Client.Http.ObjectContent">
+            <summary>
+            Contains a value as well as an associated <see cref="T:RestBus.Client.Http.Formatting.MediaTypeFormatter"/> that will be
+            used to serialize the value when writing this content.
+            </summary>
+        </member>
+        <member name="M:RestBus.Client.Http.ObjectContent.#ctor(System.Type,System.Object,RestBus.Client.Http.Formatting.MediaTypeFormatter)">
+            <summary>
+            Initializes a new instance of the <see cref="T:RestBus.Client.Http.ObjectContent"/> class.
+            </summary>
+            <param name="type">The type of object this instance will contain.</param>
+            <param name="value">The value of the object this instance will contain.</param>
+            <param name="formatter">The formatter to use when serializing the value.</param>
+        </member>
+        <member name="M:RestBus.Client.Http.ObjectContent.#ctor(System.Type,System.Object,RestBus.Client.Http.Formatting.MediaTypeFormatter,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:RestBus.Client.Http.ObjectContent"/> class.
+            </summary>
+            <param name="type">The type of object this instance will contain.</param>
+            <param name="value">The value of the object this instance will contain.</param>
+            <param name="formatter">The formatter to use when serializing the value.</param>
+            <param name="mediaType">The authoritative value of the content's Content-Type header. Can be <c>null</c> in which case the
+            <paramref name="formatter">formatter's</paramref> default content type will be used.</param>
+        </member>
+        <member name="M:RestBus.Client.Http.ObjectContent.#ctor(System.Type,System.Object,RestBus.Client.Http.Formatting.MediaTypeFormatter,System.Net.Http.Headers.MediaTypeHeaderValue)">
+            <summary>
+            Initializes a new instance of the <see cref="T:RestBus.Client.Http.ObjectContent"/> class.
+            </summary>
+            <param name="type">The type of object this instance will contain.</param>
+            <param name="value">The value of the object this instance will contain.</param>
+            <param name="formatter">The formatter to use when serializing the value.</param>
+            <param name="mediaType">The authoritative value of the content's Content-Type header. Can be <c>null</c> in which case the
+            <paramref name="formatter">formatter's</paramref> default content type will be used.</param>
+        </member>
+        <member name="P:RestBus.Client.Http.ObjectContent.ObjectType">
+            <summary>
+            Gets the type of object managed by this <see cref="T:RestBus.Client.Http.ObjectContent"/> instance.
+            </summary>
+        </member>
+        <member name="P:RestBus.Client.Http.ObjectContent.Formatter">
+            <summary>
+            The <see cref="T:RestBus.Client.Http.Formatting.MediaTypeFormatter">formatter</see> associated with this content instance.
+            </summary>
+        </member>
+        <member name="P:RestBus.Client.Http.ObjectContent.Value">
+            <summary>
+            Gets or sets the value of the current <see cref="T:RestBus.Client.Http.ObjectContent"/>.
+            </summary>
+        </member>
+        <member name="M:RestBus.Client.Http.ObjectContent.SerializeToStreamAsync(System.IO.Stream,System.Net.TransportContext)">
+            <summary>
+            Asynchronously serializes the object's content to the given <paramref name="stream"/>.
+            </summary>
+            <param name="stream">The <see cref="T:System.IO.Stream"/> to which to write.</param>
+            <param name="context">The associated <see cref="T:System.Net.TransportContext"/>.</param>
+            <returns>A <see cref="T:System.Threading.Tasks.Task"/> instance that is asynchronously serializing the object's content.</returns>
+        </member>
+        <member name="M:RestBus.Client.Http.ObjectContent.TryComputeLength(System.Int64@)">
+            <summary>
+            Computes the length of the stream if possible.
+            </summary>
+            <param name="length">The computed length of the stream.</param>
+            <returns><c>true</c> if the length has been computed; otherwise <c>false</c>.</returns>
+        </member>
+        <member name="T:RestBus.Client.Http.ObjectContent`1">
+            <summary>
+            Generic form of <see cref="T:RestBus.Client.Http.ObjectContent"/>.
+            </summary>
+            <typeparam name="T">The type of object this <see cref="T:RestBus.Client.Http.ObjectContent"/> class will contain.</typeparam>
+        </member>
+        <member name="M:RestBus.Client.Http.ObjectContent`1.#ctor(`0,RestBus.Client.Http.Formatting.MediaTypeFormatter)">
+            <summary>
+            Initializes a new instance of the <see cref="T:RestBus.Client.Http.ObjectContent`1"/> class.
+            </summary>
+            <param name="value">The value of the object this instance will contain.</param>
+            <param name="formatter">The formatter to use when serializing the value.</param>
+        </member>
+        <member name="M:RestBus.Client.Http.ObjectContent`1.#ctor(`0,RestBus.Client.Http.Formatting.MediaTypeFormatter,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:RestBus.Client.Http.ObjectContent`1"/> class.
+            </summary>
+            <param name="value">The value of the object this instance will contain.</param>
+            <param name="formatter">The formatter to use when serializing the value.</param>
+            <param name="mediaType">The authoritative value of the content's Content-Type header. Can be <c>null</c> in which case the
+            <paramref name="formatter">formatter's</paramref> default content type will be used.</param>
+        </member>
+        <member name="M:RestBus.Client.Http.ObjectContent`1.#ctor(`0,RestBus.Client.Http.Formatting.MediaTypeFormatter,System.Net.Http.Headers.MediaTypeHeaderValue)">
+            <summary>
+            Initializes a new instance of the <see cref="T:RestBus.Client.Http.ObjectContent`1"/> class.
+            </summary>
+            <param name="value">The value of the object this instance will contain.</param>
+            <param name="formatter">The formatter to use when serializing the value.</param>
+            <param name="mediaType">The authoritative value of the content's Content-Type header. Can be <c>null</c> in which case the
+            <paramref name="formatter">formatter's</paramref> default content type will be used.</param>
+        </member>
+        <member name="T:RestBus.Client.Http.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:RestBus.Client.Http.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:RestBus.Client.Http.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:RestBus.Client.Http.Properties.Resources.AsyncResult_CallbackThrewException">
+            <summary>
+              Looks up a localized string similar to Async Callback threw an exception..
+            </summary>
+        </member>
+        <member name="P:RestBus.Client.Http.Properties.Resources.AsyncResult_MultipleCompletes">
+            <summary>
+              Looks up a localized string similar to The IAsyncResult implementation &apos;{0}&apos; tried to complete a single operation multiple times. This could be caused by an incorrect application IAsyncResult implementation or other extensibility code, such as an IAsyncResult that returns incorrect CompletedSynchronously values or invokes the AsyncCallback multiple times..
+            </summary>
+        </member>
+        <member name="P:RestBus.Client.Http.Properties.Resources.AsyncResult_MultipleEnds">
+            <summary>
+              Looks up a localized string similar to End cannot be called twice on an AsyncResult..
+            </summary>
+        </member>
+        <member name="P:RestBus.Client.Http.Properties.Resources.AsyncResult_ResultMismatch">
+            <summary>
+              Looks up a localized string similar to An incorrect IAsyncResult was provided to an &apos;End&apos; method. The IAsyncResult object passed to &apos;End&apos; must be the one returned from the matching &apos;Begin&apos; or passed to the callback provided to &apos;Begin&apos;..
+            </summary>
+        </member>
+        <member name="P:RestBus.Client.Http.Properties.Resources.ByteRangeStreamContentNoRanges">
+            <summary>
+              Looks up a localized string similar to Found zero byte ranges. There must be at least one byte range provided..
+            </summary>
+        </member>
+        <member name="P:RestBus.Client.Http.Properties.Resources.ByteRangeStreamContentNotBytesRange">
+            <summary>
+              Looks up a localized string similar to The range unit &apos;{0}&apos; is not valid. The range must have a unit of &apos;{1}&apos;..
+            </summary>
+        </member>
+        <member name="P:RestBus.Client.Http.Properties.Resources.ByteRangeStreamEmpty">
+            <summary>
+              Looks up a localized string similar to The stream over which &apos;{0}&apos; provides a range view must have a length greater than or equal to 1..
+            </summary>
+        </member>
+        <member name="P:RestBus.Client.Http.Properties.Resources.ByteRangeStreamInvalidFrom">
+            <summary>
+              Looks up a localized string similar to The &apos;From&apos; value of the range must be less than or equal to {0}..
+            </summary>
+        </member>
+        <member name="P:RestBus.Client.Http.Properties.Resources.ByteRangeStreamNoneOverlap">
+            <summary>
+              Looks up a localized string similar to None of the requested ranges ({0}) overlap with the current extent of the selected resource..
+            </summary>
+        </member>
+        <member name="P:RestBus.Client.Http.Properties.Resources.ByteRangeStreamNoOverlap">
+            <summary>
+              Looks up a localized string similar to The requested range ({0}) does not overlap with the current extent of the selected resource..
+            </summary>
+        </member>
+        <member name="P:RestBus.Client.Http.Properties.Resources.ByteRangeStreamNotSeekable">
+            <summary>
+              Looks up a localized string similar to The stream over which &apos;{0}&apos; provides a range view must be seekable..
+            </summary>
+        </member>
+        <member name="P:RestBus.Client.Http.Properties.Resources.ByteRangeStreamReadOnly">
+            <summary>
+              Looks up a localized string similar to This is a read-only stream..
+            </summary>
+        </member>
+        <member name="P:RestBus.Client.Http.Properties.Resources.CannotHaveNullInList">
+            <summary>
+              Looks up a localized string similar to A null &apos;{0}&apos; is not valid..
+            </summary>
+        </member>
+        <member name="P:RestBus.Client.Http.Properties.Resources.CannotUseMediaRangeForSupportedMediaType">
+            <summary>
+              Looks up a localized string similar to The &apos;{0}&apos; of &apos;{1}&apos; cannot be used as a supported media type because it is a media range..
+            </summary>
+        </member>
+        <member name="P:RestBus.Client.Http.Properties.Resources.CannotUseNullValueType">
+            <summary>
+              Looks up a localized string similar to The &apos;{0}&apos; type cannot accept a null value for the value type &apos;{1}&apos;..
+            </summary>
+        </member>
+        <member name="P:RestBus.Client.Http.Properties.Resources.CookieInvalidName">
+            <summary>
+              Looks up a localized string similar to The specified value is not a valid cookie name..
+            </summary>
+        </member>
+        <member name="P:RestBus.Client.Http.Properties.Resources.CookieNull">
+            <summary>
+              Looks up a localized string similar to Cookie cannot be null..
+            </summary>
+        </member>
+        <member name="P:RestBus.Client.Http.Properties.Resources.DelegatingHandlerArrayContainsNullItem">
+            <summary>
+              Looks up a localized string similar to The &apos;{0}&apos; list is invalid because it contains one or more null items..
+            </summary>
+        </member>
+        <member name="P:RestBus.Client.Http.Properties.Resources.DelegatingHandlerArrayHasNonNullInnerHandler">
+            <summary>
+              Looks up a localized string similar to The &apos;{0}&apos; list is invalid because the property &apos;{1}&apos; of &apos;{2}&apos; is not null..
+            </summary>
+        </member>
+        <member name="P:RestBus.Client.Http.Properties.Resources.ErrorReadingFormUrlEncodedStream">
+            <summary>
+              Looks up a localized string similar to Error reading HTML form URL-encoded data stream..
+            </summary>
+        </member>
+        <member name="P:RestBus.Client.Http.Properties.Resources.FormUrlEncodedMismatchingTypes">
+            <summary>
+              Looks up a localized string similar to Mismatched types at node &apos;{0}&apos;..
+            </summary>
+        </member>
+        <member name="P:RestBus.Client.Http.Properties.Resources.FormUrlEncodedParseError">
+            <summary>
+              Looks up a localized string similar to Error parsing HTML form URL-encoded data, byte {0}..
+            </summary>
+        </member>
+        <member name="P:RestBus.Client.Http.Properties.Resources.HttpInvalidStatusCode">
+            <summary>
+              Looks up a localized string similar to Invalid HTTP status code: &apos;{0}&apos;. The status code must be between {1} and {2}..
+            </summary>
+        </member>
+        <member name="P:RestBus.Client.Http.Properties.Resources.HttpInvalidVersion">
+            <summary>
+              Looks up a localized string similar to Invalid HTTP version: &apos;{0}&apos;. The version must start with the characters &apos;{1}&apos;..
+            </summary>
+        </member>
+        <member name="P:RestBus.Client.Http.Properties.Resources.HttpMessageContentAlreadyRead">
+            <summary>
+              Looks up a localized string similar to The &apos;{0}&apos; of the &apos;{1}&apos; has already been read..
+            </summary>
+        </member>
+        <member name="P:RestBus.Client.Http.Properties.Resources.HttpMessageContentStreamMustBeSeekable">
+            <summary>
+              Looks up a localized string similar to The &apos;{0}&apos; must be seekable in order to create an &apos;{1}&apos; instance containing an entity body.  .
+            </summary>
+        </member>
+        <member name="P:RestBus.Client.Http.Properties.Resources.HttpMessageErrorReading">
+            <summary>
+              Looks up a localized string similar to Error reading HTTP message..
+            </summary>
+        </member>
+        <member name="P:RestBus.Client.Http.Properties.Resources.HttpMessageInvalidMediaType">
+            <summary>
+              Looks up a localized string similar to Invalid &apos;{0}&apos; instance provided. It does not have a content type header with a value of &apos;{1}&apos;..
+            </summary>
+        </member>
+        <member name="P:RestBus.Client.Http.Properties.Resources.HttpMessageParserEmptyUri">
+            <summary>
+              Looks up a localized string similar to HTTP Request URI cannot be an empty string..
+            </summary>
+        </member>
+        <member name="P:RestBus.Client.Http.Properties.Resources.HttpMessageParserError">
+            <summary>
+              Looks up a localized string similar to Error parsing HTTP message header byte {0} of message {1}..
+            </summary>
+        </member>
+        <member name="P:RestBus.Client.Http.Properties.Resources.HttpMessageParserInvalidHostCount">
+            <summary>
+              Looks up a localized string similar to An invalid number of &apos;{0}&apos; header fields were present in the HTTP Request. It must contain exactly one &apos;{0}&apos; header field but found {1}..
+            </summary>
+        </member>
+        <member name="P:RestBus.Client.Http.Properties.Resources.HttpMessageParserInvalidUriScheme">
+            <summary>
+              Looks up a localized string similar to Invalid URI scheme: &apos;{0}&apos;. The URI scheme must be a valid &apos;{1}&apos; scheme..
+            </summary>
+        </member>
+        <member name="P:RestBus.Client.Http.Properties.Resources.InvalidArrayInsert">
+            <summary>
+              Looks up a localized string similar to Invalid array at node &apos;{0}&apos;..
+            </summary>
+        </member>
+        <member name="P:RestBus.Client.Http.Properties.Resources.JQuery13CompatModeNotSupportNestedJson">
+            <summary>
+              Looks up a localized string similar to Traditional style array without &apos;[]&apos; is not supported with nested object at location {0}..
+            </summary>
+        </member>
+        <member name="P:RestBus.Client.Http.Properties.Resources.JsonSerializerFactoryReturnedNull">
+            <summary>
+              Looks up a localized string similar to The &apos;{0}&apos; method returned null. It must return a JSON serializer instance..
+            </summary>
+        </member>
+        <member name="P:RestBus.Client.Http.Properties.Resources.JsonSerializerFactoryThrew">
+            <summary>
+              Looks up a localized string similar to The &apos;{0}&apos; method threw an exception when attempting to create a JSON serializer..
+            </summary>
+        </member>
+        <member name="P:RestBus.Client.Http.Properties.Resources.MaxDepthExceeded">
+            <summary>
+              Looks up a localized string similar to The maximum read depth ({0}) has been exceeded because the form url-encoded data being read has more levels of nesting than is allowed..
+            </summary>
+        </member>
+        <member name="P:RestBus.Client.Http.Properties.Resources.MaxHttpCollectionKeyLimitReached">
+            <summary>
+              Looks up a localized string similar to The number of keys in a NameValueCollection has exceeded the limit of &apos;{0}&apos;. You can adjust it by modifying the MaxHttpCollectionKeys property on the &apos;{1}&apos; class..
+            </summary>
+        </member>
+        <member name="P:RestBus.Client.Http.Properties.Resources.MediaTypeFormatter_BsonParseError_MissingData">
+            <summary>
+              Looks up a localized string similar to Error parsing BSON data; unable to read content as a {0}..
+            </summary>
+        </member>
+        <member name="P:RestBus.Client.Http.Properties.Resources.MediaTypeFormatter_BsonParseError_UnexpectedData">
+            <summary>
+              Looks up a localized string similar to Error parsing BSON data; unexpected dictionary content: {0} entries, first key &apos;{1}&apos;..
+            </summary>
+        </member>
+        <member name="P:RestBus.Client.Http.Properties.Resources.MediaTypeFormatter_JsonReaderFactoryReturnedNull">
+            <summary>
+              Looks up a localized string similar to The &apos;{0}&apos; method returned null. It must return a JSON reader instance..
+            </summary>
+        </member>
+        <member name="P:RestBus.Client.Http.Properties.Resources.MediaTypeFormatter_JsonWriterFactoryReturnedNull">
+            <summary>
+              Looks up a localized string similar to The &apos;{0}&apos; method returned null. It must return a JSON writer instance..
+            </summary>
+        </member>
+        <member name="P:RestBus.Client.Http.Properties.Resources.MediaTypeFormatterCannotRead">
+            <summary>
+              Looks up a localized string similar to The media type formatter of type &apos;{0}&apos; does not support reading because it does not implement the ReadFromStreamAsync method..
+            </summary>
+        </member>
+        <member name="P:RestBus.Client.Http.Properties.Resources.MediaTypeFormatterCannotReadSync">
+            <summary>
+              Looks up a localized string similar to The media type formatter of type &apos;{0}&apos; does not support reading because it does not implement the ReadFromStream method..
+            </summary>
+        </member>
+        <member name="P:RestBus.Client.Http.Properties.Resources.MediaTypeFormatterCannotWrite">
+            <summary>
+              Looks up a localized string similar to The media type formatter of type &apos;{0}&apos; does not support writing because it does not implement the WriteToStreamAsync method..
+            </summary>
+        </member>
+        <member name="P:RestBus.Client.Http.Properties.Resources.MediaTypeFormatterCannotWriteSync">
+            <summary>
+              Looks up a localized string similar to The media type formatter of type &apos;{0}&apos; does not support writing because it does not implement the WriteToStream method..
+            </summary>
+        </member>
+        <member name="P:RestBus.Client.Http.Properties.Resources.MediaTypeFormatterNoEncoding">
+            <summary>
+              Looks up a localized string similar to No encoding found for media type formatter &apos;{0}&apos;. There must be at least one supported encoding registered in order for the media type formatter to read or write content..
+            </summary>
+        </member>
+        <member name="P:RestBus.Client.Http.Properties.Resources.MimeMultipartParserBadBoundary">
+            <summary>
+              Looks up a localized string similar to MIME multipart boundary cannot end with an empty space..
+            </summary>
+        </member>
+        <member name="P:RestBus.Client.Http.Properties.Resources.MultipartFormDataStreamProviderNoContentDisposition">
+            <summary>
+              Looks up a localized string similar to Did not find required &apos;{0}&apos; header field in MIME multipart body part..
+            </summary>
+        </member>
+        <member name="P:RestBus.Client.Http.Properties.Resources.MultipartStreamProviderInvalidLocalFileName">
+            <summary>
+              Looks up a localized string similar to Could not determine a valid local file name for the multipart body part..
+            </summary>
+        </member>
+        <member name="P:RestBus.Client.Http.Properties.Resources.NestedBracketNotValid">
+            <summary>
+              Looks up a localized string similar to Nested bracket is not valid for &apos;{0}&apos; data at position {1}..
+            </summary>
+        </member>
+        <member name="P:RestBus.Client.Http.Properties.Resources.NonNullUriRequiredForMediaTypeMapping">
+            <summary>
+              Looks up a localized string similar to A non-null request URI must be provided to determine if a &apos;{0}&apos; matches a given request or response message..
+            </summary>
+        </member>
+        <member name="P:RestBus.Client.Http.Properties.Resources.NoReadSerializerAvailable">
+            <summary>
+              Looks up a localized string similar to No MediaTypeFormatter is available to read an object of type &apos;{0}&apos; from content with media type &apos;{1}&apos;..
+            </summary>
+        </member>
+        <member name="P:RestBus.Client.Http.Properties.Resources.ObjectAndTypeDisagree">
+            <summary>
+              Looks up a localized string similar to An object of type &apos;{0}&apos; cannot be used with a type parameter of &apos;{1}&apos;..
+            </summary>
+        </member>
+        <member name="P:RestBus.Client.Http.Properties.Resources.ObjectContent_FormatterCannotWriteType">
+            <summary>
+              Looks up a localized string similar to The configured formatter &apos;{0}&apos; cannot write an object of type &apos;{1}&apos;..
+            </summary>
+        </member>
+        <member name="P:RestBus.Client.Http.Properties.Resources.QueryStringNameShouldNotNull">
+            <summary>
+              Looks up a localized string similar to Query string name cannot be null..
+            </summary>
+        </member>
+        <member name="P:RestBus.Client.Http.Properties.Resources.ReadAsHttpMessageUnexpectedTermination">
+            <summary>
+              Looks up a localized string similar to Unexpected end of HTTP message stream. HTTP message is not complete..
+            </summary>
+        </member>
+        <member name="P:RestBus.Client.Http.Properties.Resources.ReadAsMimeMultipartArgumentNoBoundary">
+            <summary>
+              Looks up a localized string similar to Invalid &apos;{0}&apos; instance provided. It does not have a &apos;{1}&apos; content-type header with a &apos;{2}&apos; parameter..
+            </summary>
+        </member>
+        <member name="P:RestBus.Client.Http.Properties.Resources.ReadAsMimeMultipartArgumentNoContentType">
+            <summary>
+              Looks up a localized string similar to Invalid &apos;{0}&apos; instance provided. It does not have a content-type header value. &apos;{0}&apos; instances must have a content-type header starting with &apos;{1}&apos;..
+            </summary>
+        </member>
+        <member name="P:RestBus.Client.Http.Properties.Resources.ReadAsMimeMultipartArgumentNoMultipart">
+            <summary>
+              Looks up a localized string similar to Invalid &apos;{0}&apos; instance provided. It does not have a content type header starting with &apos;{1}&apos;..
+            </summary>
+        </member>
+        <member name="P:RestBus.Client.Http.Properties.Resources.ReadAsMimeMultipartErrorReading">
+            <summary>
+              Looks up a localized string similar to Error reading MIME multipart body part..
+            </summary>
+        </member>
+        <member name="P:RestBus.Client.Http.Properties.Resources.ReadAsMimeMultipartErrorWriting">
+            <summary>
+              Looks up a localized string similar to Error writing MIME multipart body part to output stream..
+            </summary>
+        </member>
+        <member name="P:RestBus.Client.Http.Properties.Resources.ReadAsMimeMultipartHeaderParseError">
+            <summary>
+              Looks up a localized string similar to Error parsing MIME multipart body part header byte {0} of data segment {1}..
+            </summary>
+        </member>
+        <member name="P:RestBus.Client.Http.Properties.Resources.ReadAsMimeMultipartParseError">
+            <summary>
+              Looks up a localized string similar to Error parsing MIME multipart message byte {0} of data segment {1}..
+            </summary>
+        </member>
+        <member name="P:RestBus.Client.Http.Properties.Resources.ReadAsMimeMultipartStreamProviderException">
+            <summary>
+              Looks up a localized string similar to The stream provider of type &apos;{0}&apos; threw an exception..
+            </summary>
+        </member>
+        <member name="P:RestBus.Client.Http.Properties.Resources.ReadAsMimeMultipartStreamProviderNull">
+            <summary>
+              Looks up a localized string similar to The stream provider of type &apos;{0}&apos; returned null. It must return a writable &apos;{1}&apos; instance..
+            </summary>
+        </member>
+        <member name="P:RestBus.Client.Http.Properties.Resources.ReadAsMimeMultipartStreamProviderReadOnly">
+            <summary>
+              Looks up a localized string similar to The stream provider of type &apos;{0}&apos; returned a read-only stream. It must return a writable &apos;{1}&apos; instance..
+            </summary>
+        </member>
+        <member name="P:RestBus.Client.Http.Properties.Resources.ReadAsMimeMultipartUnexpectedTermination">
+            <summary>
+              Looks up a localized string similar to Unexpected end of MIME multipart stream. MIME multipart message is not complete..
+            </summary>
+        </member>
+        <member name="P:RestBus.Client.Http.Properties.Resources.RemoteStreamInfoCannotBeNull">
+            <summary>
+              Looks up a localized string similar to The &apos;{0}&apos; method in &apos;{1}&apos; returned null. It must return a RemoteStreamResult instance containing a writable stream and a valid URL..
+            </summary>
+        </member>
+        <member name="P:RestBus.Client.Http.Properties.Resources.SerializerCannotSerializeType">
+            <summary>
+              Looks up a localized string similar to The &apos;{0}&apos; serializer cannot serialize the type &apos;{1}&apos;..
+            </summary>
+        </member>
+        <member name="P:RestBus.Client.Http.Properties.Resources.UnMatchedBracketNotValid">
+            <summary>
+              Looks up a localized string similar to There is an unmatched opened bracket for the &apos;{0}&apos; at position {1}..
+            </summary>
+        </member>
+        <member name="P:RestBus.Client.Http.Properties.Resources.UnsupportedIndent">
+            <summary>
+              Looks up a localized string similar to Indentation is not supported by &apos;{0}&apos;..
+            </summary>
+        </member>
+        <member name="P:RestBus.Client.Http.Properties.Resources.XmlMediaTypeFormatter_InvalidSerializerType">
+            <summary>
+              Looks up a localized string similar to The object of type &apos;{0}&apos; returned by {1} must be an instance of either XmlObjectSerializer or XmlSerializer..
+            </summary>
+        </member>
+        <member name="P:RestBus.Client.Http.Properties.Resources.XmlMediaTypeFormatter_NullReturnedSerializer">
+            <summary>
+              Looks up a localized string similar to The object returned by {0} must not be a null value..
+            </summary>
+        </member>
+        <member name="T:RestBus.Client.Http.TaskHelpers">
+            <summary>
+            Helpers for safely using Task libraries. 
+            </summary>
+        </member>
+        <member name="M:RestBus.Client.Http.TaskHelpers.Canceled">
+            <summary>
+            Returns a canceled Task. The task is completed, IsCanceled = True, IsFaulted = False.
+            </summary>
+        </member>
+        <member name="M:RestBus.Client.Http.TaskHelpers.Canceled``1">
+            <summary>
+            Returns a canceled Task of the given type. The task is completed, IsCanceled = True, IsFaulted = False.
+            </summary>
+        </member>
+        <member name="M:RestBus.Client.Http.TaskHelpers.Completed">
+            <summary>
+            Returns a completed task that has no result. 
+            </summary>        
+        </member>
+        <member name="M:RestBus.Client.Http.TaskHelpers.FromError(System.Exception)">
+            <summary>
+            Returns an error task. The task is Completed, IsCanceled = False, IsFaulted = True
+            </summary>
+        </member>
+        <member name="M:RestBus.Client.Http.TaskHelpers.FromError``1(System.Exception)">
+            <summary>
+            Returns an error task of the given type. The task is Completed, IsCanceled = False, IsFaulted = True
+            </summary>
+            <typeparam name="TResult"></typeparam>
+        </member>
+        <member name="T:RestBus.Client.Http.TaskHelpers.AsyncVoid">
+            <summary>
+            Used as the T in a "conversion" of a Task into a Task{T}
+            </summary>
+        </member>
+        <member name="T:RestBus.Client.Http.TaskHelpers.CancelCache`1">
+            <summary>
+            This class is a convenient cache for per-type cancelled tasks
+            </summary>
+        </member>
+        <member name="M:RestBus.Client.Http.TaskHelpersExtensions.CastToObject(System.Threading.Tasks.Task)">
+            <summary>
+            Cast Task to Task of object
+            </summary>
+        </member>
+        <member name="M:RestBus.Client.Http.TaskHelpersExtensions.CastToObject``1(System.Threading.Tasks.Task{``0})">
+            <summary>
+            Cast Task of T to Task of object
+            </summary>
+        </member>
+        <member name="M:RestBus.Client.Http.TaskHelpersExtensions.ThrowIfFaulted(System.Threading.Tasks.Task)">
+            <summary>
+            Throws the first faulting exception for a task which is faulted. It preserves the original stack trace when
+            throwing the exception. Note: It is the caller's responsibility not to pass incomplete tasks to this
+            method, because it does degenerate into a call to the equivalent of .Wait() on the task when it hasn't yet
+            completed.
+            </summary>
+        </member>
+        <member name="M:RestBus.Client.Http.TaskHelpersExtensions.TryGetResult``1(System.Threading.Tasks.Task{``0},``0@)">
+            <summary>
+            Attempts to get the result value for the given task. If the task ran to completion, then
+            it will return true and set the result value; otherwise, it will return false.
+            </summary>
+        </member>
+        <member name="T:RestBus.Client.RequestMessagingProperties">
+            <summary>
+            Base class for specifying broker specific messaging properties for requests.
+            </summary>
+        </member>
+        <member name="M:RestBus.Client.RestBusClientExtensions.GetAsync(System.Net.Http.HttpMessageInvoker,System.String,RestBus.Client.RequestOptions)">
+            <summary>Send a GET request to the specified Uri as an asynchronous operation.</summary>
+            <returns>Returns <see cref="T:System.Threading.Tasks.Task`1" />.The task object representing the asynchronous operation.</returns>
+            <param name="client">The client used to make the request.</param>
+            <param name="requestUri">The Uri the request is sent to.</param>
+            <param name="options">The options for the request.</param>
+            <exception cref="T:System.ArgumentNullException">The <paramref name="requestUri" /> was null.</exception>
+        </member>
+        <member name="M:RestBus.Client.RestBusClientExtensions.GetAsync(System.Net.Http.HttpMessageInvoker,System.Uri,RestBus.Client.RequestOptions)">
+            <summary>Send a GET request to the specified Uri as an asynchronous operation.</summary>
+            <returns>Returns <see cref="T:System.Threading.Tasks.Task`1" />.The task object representing the asynchronous operation.</returns>
+            <param name="client">The client used to make the request.</param>
+            <param name="requestUri">The Uri the request is sent to.</param>
+            <param name="options">The options for the request.</param>
+            <exception cref="T:System.ArgumentNullException">The <paramref name="requestUri" /> was null.</exception>
+        </member>
+        <member name="M:RestBus.Client.RestBusClientExtensions.GetAsync(System.Net.Http.HttpMessageInvoker,System.String,System.Threading.CancellationToken,RestBus.Client.RequestOptions)">
+            <summary>Send a GET request to the specified Uri with a cancellation token as an asynchronous operation.</summary>
+            <returns>Returns <see cref="T:System.Threading.Tasks.Task`1" />.</returns>
+            <param name="client">The client used to make the request.</param>
+            <param name="requestUri">The Uri the request is sent to.</param>
+            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+            <param name="options">The options for the request.</param>
+            <exception cref="T:System.ArgumentNullException">The <paramref name="requestUri" /> was null.</exception>
+        </member>
+        <member name="M:RestBus.Client.RestBusClientExtensions.GetAsync(System.Net.Http.HttpMessageInvoker,System.Uri,System.Threading.CancellationToken,RestBus.Client.RequestOptions)">
+            <summary>Send a GET request to the specified Uri with a cancellation token as an asynchronous operation.</summary>
+            <returns>Returns <see cref="T:System.Threading.Tasks.Task`1" />.The task object representing the asynchronous operation.</returns>
+            <param name="client">The client used to make the request.</param>
+            <param name="requestUri">The Uri the request is sent to.</param>
+            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+            <param name="options">The options for the request.</param> 
+            <exception cref="T:System.ArgumentNullException">The <paramref name="requestUri" /> was null.</exception>
+        </member>
+        <member name="M:RestBus.Client.RestBusClientExtensions.PostAsync(System.Net.Http.HttpMessageInvoker,System.String,System.Net.Http.HttpContent,RestBus.Client.RequestOptions)">
+            <summary>Send a POST request to the specified Uri as an asynchronous operation.</summary>
+            <returns>Returns <see cref="T:System.Threading.Tasks.Task`1" />.The task object representing the asynchronous operation.</returns>
+            <param name="client">The client used to make the request.</param>
+            <param name="requestUri">The Uri the request is sent to.</param>
+            <param name="content">The HTTP request content sent to the server.</param>
+            <param name="options">The options for the request.</param> 
+            <exception cref="T:System.ArgumentNullException">The <paramref name="requestUri" /> was null.</exception>
+        </member>
+        <member name="M:RestBus.Client.RestBusClientExtensions.PostAsync(System.Net.Http.HttpMessageInvoker,System.Uri,System.Net.Http.HttpContent,RestBus.Client.RequestOptions)">
+            <summary>Send a POST request to the specified Uri as an asynchronous operation.</summary>
+            <returns>Returns <see cref="T:System.Threading.Tasks.Task`1" />.The task object representing the asynchronous operation.</returns>
+            <param name="client">The client used to make the request.</param>
+            <param name="requestUri">The Uri the request is sent to.</param>
+            <param name="content">The HTTP request content sent to the server.</param>
+            <param name="options">The options for the request.</param> 
+            <exception cref="T:System.ArgumentNullException">The <paramref name="requestUri" /> was null.</exception>
+        </member>
+        <member name="M:RestBus.Client.RestBusClientExtensions.PostAsync(System.Net.Http.HttpMessageInvoker,System.String,System.Net.Http.HttpContent,System.Threading.CancellationToken,RestBus.Client.RequestOptions)">
+            <summary>Send a POST request with a cancellation token as an asynchronous operation.</summary>
+            <returns>Returns <see cref="T:System.Threading.Tasks.Task`1" />.The task object representing the asynchronous operation.</returns>
+            <param name="client">The client used to make the request.</param>
+            <param name="requestUri">The Uri the request is sent to.</param>
+            <param name="content">The HTTP request content sent to the server.</param>
+            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+            <param name="options">The options for the request.</param> 
+            <exception cref="T:System.ArgumentNullException">The <paramref name="requestUri" /> was null.</exception>
+        </member>
+        <member name="M:RestBus.Client.RestBusClientExtensions.PostAsync(System.Net.Http.HttpMessageInvoker,System.Uri,System.Net.Http.HttpContent,System.Threading.CancellationToken,RestBus.Client.RequestOptions)">
+            <summary>Send a POST request with a cancellation token as an asynchronous operation.</summary>
+            <returns>Returns <see cref="T:System.Threading.Tasks.Task`1" />.The task object representing the asynchronous operation.</returns>
+            <param name="client">The client used to make the request.</param>
+            <param name="requestUri">The Uri the request is sent to.</param>
+            <param name="content">The HTTP request content sent to the server.</param>
+            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+            <param name="options">The options for the request.</param> 
+            <exception cref="T:System.ArgumentNullException">The <paramref name="requestUri" /> was null.</exception>
+        </member>
+        <member name="M:RestBus.Client.RestBusClientExtensions.PutAsync(System.Net.Http.HttpMessageInvoker,System.String,System.Net.Http.HttpContent,RestBus.Client.RequestOptions)">
+            <summary>Send a PUT request to the specified Uri as an asynchronous operation.</summary>
+            <returns>Returns <see cref="T:System.Threading.Tasks.Task`1" />.The task object representing the asynchronous operation.</returns>
+            <param name="client">The client used to make the request.</param>
+            <param name="requestUri">The Uri the request is sent to.</param>
+            <param name="content">The HTTP request content sent to the server.</param>
+            <param name="options">The options for the request.</param> 
+            <exception cref="T:System.ArgumentNullException">The <paramref name="requestUri" /> was null.</exception>
+        </member>
+        <member name="M:RestBus.Client.RestBusClientExtensions.PutAsync(System.Net.Http.HttpMessageInvoker,System.Uri,System.Net.Http.HttpContent,RestBus.Client.RequestOptions)">
+            <summary>Send a PUT request to the specified Uri as an asynchronous operation.</summary>
+            <returns>Returns <see cref="T:System.Threading.Tasks.Task`1" />.The task object representing the asynchronous operation.</returns>
+            <param name="client">The client used to make the request.</param>
+            <param name="requestUri">The Uri the request is sent to.</param>
+            <param name="content">The HTTP request content sent to the server.</param>
+            <param name="options">The options for the request.</param> 
+            <exception cref="T:System.ArgumentNullException">The <paramref name="requestUri" /> was null.</exception>
+        </member>
+        <member name="M:RestBus.Client.RestBusClientExtensions.PutAsync(System.Net.Http.HttpMessageInvoker,System.String,System.Net.Http.HttpContent,System.Threading.CancellationToken,RestBus.Client.RequestOptions)">
+            <summary>Send a PUT request with a cancellation token as an asynchronous operation.</summary>
+            <returns>Returns <see cref="T:System.Threading.Tasks.Task`1" />.The task object representing the asynchronous operation.</returns>
+            <param name="client">The client used to make the request.</param>
+            <param name="requestUri">The Uri the request is sent to.</param>
+            <param name="content">The HTTP request content sent to the server.</param>
+            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+            <param name="options">The options for the request.</param> 
+            <exception cref="T:System.ArgumentNullException">The <paramref name="requestUri" /> was null.</exception>
+        </member>
+        <member name="M:RestBus.Client.RestBusClientExtensions.PutAsync(System.Net.Http.HttpMessageInvoker,System.Uri,System.Net.Http.HttpContent,System.Threading.CancellationToken,RestBus.Client.RequestOptions)">
+            <summary>Send a PUT request with a cancellation token as an asynchronous operation.</summary>
+            <returns>Returns <see cref="T:System.Threading.Tasks.Task`1" />.The task object representing the asynchronous operation.</returns>
+            <param name="client">The client used to make the request.</param>
+            <param name="requestUri">The Uri the request is sent to.</param>
+            <param name="content">The HTTP request content sent to the server.</param>
+            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+            <param name="options">The options for the request.</param> 
+            <exception cref="T:System.ArgumentNullException">The <paramref name="requestUri" /> was null.</exception>
+        </member>
+        <member name="M:RestBus.Client.RestBusClientExtensions.DeleteAsync(System.Net.Http.HttpMessageInvoker,System.String,RestBus.Client.RequestOptions)">
+            <summary>Send a DELETE request to the specified Uri as an asynchronous operation.</summary>
+            <returns>Returns <see cref="T:System.Threading.Tasks.Task`1" />.The task object representing the asynchronous operation.</returns>
+            <param name="client">The client used to make the request.</param>
+            <param name="requestUri">The Uri the request is sent to.</param>
+            <param name="options">The options for the request.</param>
+            <exception cref="T:System.ArgumentNullException">The <paramref name="requestUri" /> was null.</exception>
+        </member>
+        <member name="M:RestBus.Client.RestBusClientExtensions.DeleteAsync(System.Net.Http.HttpMessageInvoker,System.Uri,RestBus.Client.RequestOptions)">
+            <summary>Send a DELETE request to the specified Uri as an asynchronous operation.</summary>
+            <returns>Returns <see cref="T:System.Threading.Tasks.Task`1" />.The task object representing the asynchronous operation.</returns>
+            <param name="client">The client used to make the request.</param>
+            <param name="requestUri">The Uri the request is sent to.</param>
+            <param name="options">The options for the request.</param>
+            <exception cref="T:System.ArgumentNullException">The <paramref name="requestUri" /> was null.</exception>
+        </member>
+        <member name="M:RestBus.Client.RestBusClientExtensions.DeleteAsync(System.Net.Http.HttpMessageInvoker,System.String,System.Threading.CancellationToken,RestBus.Client.RequestOptions)">
+            <summary>Send a DELETE request to the specified Uri with a cancellation token as an asynchronous operation.</summary>
+            <returns>Returns <see cref="T:System.Threading.Tasks.Task`1" />.The task object representing the asynchronous operation.</returns>
+            <param name="client">The client used to make the request.</param>
+            <param name="requestUri">The Uri the request is sent to.</param>
+            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+            <param name="options">The options for the request.</param>
+            <exception cref="T:System.ArgumentNullException">The <paramref name="requestUri" /> was null.</exception>
+        </member>
+        <member name="M:RestBus.Client.RestBusClientExtensions.DeleteAsync(System.Net.Http.HttpMessageInvoker,System.Uri,System.Threading.CancellationToken,RestBus.Client.RequestOptions)">
+            <summary>Send a DELETE request to the specified Uri with a cancellation token as an asynchronous operation.</summary>
+            <returns>Returns <see cref="T:System.Threading.Tasks.Task`1" />.The task object representing the asynchronous operation.</returns>
+            <param name="client">The client used to make the request.</param>
+            <param name="requestUri">The Uri the request is sent to.</param>
+            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+            <param name="options">The options for the request.</param>
+            <exception cref="T:System.ArgumentNullException">The <paramref name="requestUri" /> was null.</exception>
+        </member>
+        <member name="M:RestBus.Client.RestBusClientExtensions.GetStringAsync(System.Net.Http.HttpMessageInvoker,System.String,RestBus.Client.RequestOptions)">
+            <summary>Send a GET request to the specified Uri and return the response body as a string in an asynchronous operation.</summary>
+            <returns>Returns <see cref="T:System.Threading.Tasks.Task`1" />.The task object representing the asynchronous operation.</returns>
+            <param name="client">The client used to make the request.</param>
+            <param name="requestUri">The Uri the request is sent to.</param>
+            <param name="options">The options for the request.</param>
+            <exception cref="T:System.ArgumentNullException">The <paramref name="requestUri" /> was null.</exception>
+        </member>
+        <member name="M:RestBus.Client.RestBusClientExtensions.GetStringAsync(System.Net.Http.HttpMessageInvoker,System.Uri,RestBus.Client.RequestOptions)">
+            <summary>Send a GET request to the specified Uri and return the response body as a string in an asynchronous operation.</summary>
+            <returns>Returns <see cref="T:System.Threading.Tasks.Task`1" />.The task object representing the asynchronous operation.</returns>
+            <param name="client">The client used to make the request.</param>
+            <param name="requestUri">The Uri the request is sent to.</param>
+            <param name="options">The options for the request.</param>
+            <exception cref="T:System.ArgumentNullException">The <paramref name="requestUri" /> was null.</exception>
+        </member>
+        <member name="M:RestBus.Client.RestBusClientExtensions.GetByteArrayAsync(System.Net.Http.HttpMessageInvoker,System.String,RestBus.Client.RequestOptions)">
+            <summary>Send a GET request to the specified Uri and return the response body as a byte array in an asynchronous operation.</summary>
+            <returns>Returns <see cref="T:System.Threading.Tasks.Task`1" />.The task object representing the asynchronous operation.</returns>
+            <param name="client">The client used to make the request.</param>
+            <param name="requestUri">The Uri the request is sent to.</param>
+            <param name="options">The options for the request.</param>
+            <exception cref="T:System.ArgumentNullException">The <paramref name="requestUri" /> was null.</exception>
+        </member>
+        <member name="M:RestBus.Client.RestBusClientExtensions.GetByteArrayAsync(System.Net.Http.HttpMessageInvoker,System.Uri,RestBus.Client.RequestOptions)">
+            <summary>Send a GET request to the specified Uri and return the response body as a byte array in an asynchronous operation.</summary>
+            <returns>Returns <see cref="T:System.Threading.Tasks.Task`1" />.The task object representing the asynchronous operation.</returns>
+            <param name="client">The client used to make the request.</param>
+            <param name="requestUri">The Uri the request is sent to.</param>
+            <param name="options">The options for the request.</param>
+            <exception cref="T:System.ArgumentNullException">The <paramref name="requestUri" /> was null.</exception>
+        </member>
+        <member name="M:RestBus.Client.RestBusClientExtensions.GetStreamAsync(System.Net.Http.HttpMessageInvoker,System.String,RestBus.Client.RequestOptions)">
+            <summary>Send a GET request to the specified Uri and return the response body as a stream in an asynchronous operation.</summary>
+            <returns>Returns <see cref="T:System.Threading.Tasks.Task`1" />.The task object representing the asynchronous operation.</returns>
+            <param name="client">The client used to make the request.</param>
+            <param name="requestUri">The Uri the request is sent to.</param>
+            <param name="options">The options for the request.</param>
+            <exception cref="T:System.ArgumentNullException">The <paramref name="requestUri" /> was null.</exception>
+        </member>
+        <member name="M:RestBus.Client.RestBusClientExtensions.GetStreamAsync(System.Net.Http.HttpMessageInvoker,System.Uri,RestBus.Client.RequestOptions)">
+            <summary>Send a GET request to the specified Uri and return the response body as a stream in an asynchronous operation.</summary>
+            <returns>Returns <see cref="T:System.Threading.Tasks.Task`1" />.The task object representing the asynchronous operation.</returns>
+            <param name="client">The client used to make the request.</param>
+            <param name="requestUri">The Uri the request is sent to.</param>
+            <param name="options">The options for the request.</param>
+            <exception cref="T:System.ArgumentNullException">The <paramref name="requestUri" /> was null.</exception>
+        </member>
+        <member name="M:RestBus.Client.RestBusClientExtensions.SendAsync(System.Net.Http.HttpMessageInvoker,System.Net.Http.HttpRequestMessage,RestBus.Client.RequestOptions)">
+            <summary>Send an HTTP request as an asynchronous operation.</summary>
+            <returns>Returns <see cref="T:System.Threading.Tasks.Task`1" />.The task object representing the asynchronous operation.</returns>
+            <param name="client">The client used to make the request.</param>
+            <param name="request">The HTTP request message to send.</param>
+            <param name="options">The options for the request.</param>
+            <exception cref="T:System.ArgumentNullException">The <paramref name="request" /> was null.</exception>
+        </member>
+        <member name="M:RestBus.Client.RestBusClientExtensions.SendAsync(System.Net.Http.HttpMessageInvoker,System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken,RestBus.Client.RequestOptions)">
+            <summary>Send an HTTP request as an asynchronous operation. </summary>
+            <returns>Returns <see cref="T:System.Threading.Tasks.Task`1" />.The task object representing the asynchronous operation.</returns>
+            <param name="client">The client used to make the request.</param>
+            <param name="request">The HTTP request message to send.</param>
+            <param name="cancellationToken">The cancellation token to cancel operation.</param>
+            <param name="options">The options for the request.</param>
+        </member>
+        <member name="M:RestBus.Client.RestBusClientExtensions.PostAsJsonAsync``1(System.Net.Http.HttpMessageInvoker,System.String,``0,RestBus.Client.RequestOptions)">
+            <summary>Sends a POST request as an asynchronous operation, with a specified value serialized as JSON.</summary>
+            <returns>A task object representing the asynchronous operation.</returns>
+            <param name="client">The client used to make the request.</param>
+            <param name="requestUri">The URI the request is sent to.</param>
+            <param name="value">The value to write into the entity body of the request.</param>
+            <param name="options">The options for the request.</param>
+            <typeparam name="T">The type of object to serialize.</typeparam>
+        </member>
+        <member name="M:RestBus.Client.RestBusClientExtensions.PostAsJsonAsync``1(System.Net.Http.HttpMessageInvoker,System.String,``0,System.Threading.CancellationToken,RestBus.Client.RequestOptions)">
+            <summary>Sends a POST request as an asynchronous operation, with a specified value serialized as JSON. Includes a cancellation token to cancel the request.</summary>
+            <returns>A task object representing the asynchronous operation.</returns>
+            <param name="client">The client used to make the request.</param>
+            <param name="requestUri">The URI the request is sent to.</param>
+            <param name="value">The value to write into the entity body of the request.</param>
+            <param name="options">The options for the request.</param>
+            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+            <typeparam name="T">The type of object to serialize.</typeparam>
+        </member>
+        <member name="M:RestBus.Client.RestBusClientExtensions.PostAsXmlAsync``1(System.Net.Http.HttpMessageInvoker,System.String,``0,RestBus.Client.RequestOptions)">
+            <summary>Sends a POST request as an asynchronous operation, with a specified value serialized as XML.</summary>
+            <returns>A task object representing the asynchronous operation.</returns>
+            <param name="client">The client used to make the request.</param>
+            <param name="requestUri">The URI the request is sent to.</param>
+            <param name="value">The value to write into the entity body of the request.</param>
+            <param name="options">The options for the request.</param>
+            <typeparam name="T">The type of object to serialize.</typeparam>
+        </member>
+        <member name="M:RestBus.Client.RestBusClientExtensions.PostAsXmlAsync``1(System.Net.Http.HttpMessageInvoker,System.String,``0,System.Threading.CancellationToken,RestBus.Client.RequestOptions)">
+            <summary>Sends a POST request as an asynchronous operation, with a specified value serialized as XML. Includes a cancellation token to cancel the request.</summary>
+            <returns>A task object representing the asynchronous operation.</returns>
+            <param name="client">The client used to make the request.</param>
+            <param name="requestUri">The URI the request is sent to.</param>
+            <param name="value">The value to write into the entity body of the request.</param>
+            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+            <param name="options">The options for the request.</param>
+            <typeparam name="T">The type of object to serialize.</typeparam>
+        </member>
+        <member name="M:RestBus.Client.RestBusClientExtensions.PostAsync``1(System.Net.Http.HttpMessageInvoker,System.String,``0,RestBus.Client.Http.Formatting.MediaTypeFormatter,RestBus.Client.RequestOptions)">
+            <summary>Sends a POST request as an asynchronous operation, with a specified value serialized using the given formatter.</summary>
+            <returns>A task object representing the asynchronous operation.</returns>
+            <param name="client">The client used to make the request.</param>
+            <param name="requestUri">The URI the request is sent to.</param>
+            <param name="value">The value to write into the entity body of the request.</param>
+            <param name="formatter">The formatter used to serialize the value.</param>
+            <param name="options">The options for the request.</param>
+            <typeparam name="T">The type of object to serialize.</typeparam>
+        </member>
+        <member name="M:RestBus.Client.RestBusClientExtensions.PostAsync``1(System.Net.Http.HttpMessageInvoker,System.String,``0,RestBus.Client.Http.Formatting.MediaTypeFormatter,System.Threading.CancellationToken,RestBus.Client.RequestOptions)">
+            <summary>Sends a POST request as an asynchronous operation, with a specified value serialized using the given formatter. Includes a cancellation token to cancel the request.</summary>
+            <returns>A task object representing the asynchronous operation.</returns>
+            <param name="client">The client used to make the request.</param>
+            <param name="requestUri">The URI the request is sent to.</param>
+            <param name="value">The value to write into the entity body of the request.</param>
+            <param name="formatter">The formatter used to serialize the value.</param>
+            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+            <param name="options">The options for the request.</param>
+            <typeparam name="T">The type of object to serialize.</typeparam>
+        </member>
+        <member name="M:RestBus.Client.RestBusClientExtensions.PostAsync``1(System.Net.Http.HttpMessageInvoker,System.String,``0,RestBus.Client.Http.Formatting.MediaTypeFormatter,System.String,RestBus.Client.RequestOptions)">
+            <summary>Sends a POST request as an asynchronous operation, with a specified value serialized using the given formatter and media type string.</summary>
+            <returns>A task object representing the asynchronous operation.</returns>
+            <param name="client">The client used to make the request.</param>
+            <param name="requestUri">The URI the request is sent to.</param>
+            <param name="value">The value to write into the entity body of the request.</param>
+            <param name="formatter">The formatter used to serialize the value.</param>
+            <param name="mediaType">The authoritative value of the Content-Type header. Can be null, in which case the  default content type of the formatter will be used.</param>
+            <param name="options">The options for the request.</param>
+            <typeparam name="T">The type of object to serialize.</typeparam>
+        </member>
+        <member name="M:RestBus.Client.RestBusClientExtensions.PostAsync``1(System.Net.Http.HttpMessageInvoker,System.String,``0,RestBus.Client.Http.Formatting.MediaTypeFormatter,System.String,System.Threading.CancellationToken,RestBus.Client.RequestOptions)">
+            <summary>Sends a POST request as an asynchronous operation, with a specified value serialized using the given formatter and media type string. Includes a cancellation token to cancel the request.</summary>
+            <returns>A task object representing the asynchronous operation.</returns>
+            <param name="client">The client used to make the request.</param>
+            <param name="requestUri">The URI the request is sent to.</param>
+            <param name="value">The value to write into the entity body of the request.</param>
+            <param name="formatter">The formatter used to serialize the value.</param>
+            <param name="mediaType">The authoritative value of the Content-Type header. Can be null, in which case the  default content type of the formatter will be used.</param>
+            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+            <param name="options">The options for the request.</param>
+            <typeparam name="T">The type of object to serialize.</typeparam>
+        </member>
+        <member name="M:RestBus.Client.RestBusClientExtensions.PostAsync``1(System.Net.Http.HttpMessageInvoker,System.String,``0,RestBus.Client.Http.Formatting.MediaTypeFormatter,System.Net.Http.Headers.MediaTypeHeaderValue,System.Threading.CancellationToken,RestBus.Client.RequestOptions)">
+            <summary>Sends a POST request as an asynchronous operation, with a specified value serialized using the given formatter and media type.</summary>
+            <returns>A task object representing the asynchronous operation.</returns>
+            <param name="client">The client used to make the request.</param>
+            <param name="requestUri">The URI the request is sent to.</param>
+            <param name="value">The value to write into the entity body of the request.</param>
+            <param name="formatter">The formatter used to serialize the value.</param>
+            <param name="mediaType">The authoritative value of the Content-Type header. Can be null, in which case the  default content type of the formatter will be used.</param>
+            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+            <param name="options">The options for the request.</param>
+            <typeparam name="T">The type of object to serialize.</typeparam>
+        </member>
+        <member name="M:RestBus.Client.RestBusClientExtensions.PutAsJsonAsync``1(System.Net.Http.HttpMessageInvoker,System.String,``0,RestBus.Client.RequestOptions)">
+            <summary>Sends a PUT request as an asynchronous operation, with a specified value serialized as JSON.</summary>
+            <returns>A task object representing the asynchronous operation.</returns>
+            <param name="client">The client used to make the request.</param>
+            <param name="requestUri">The URI the request is sent to.</param>
+            <param name="value">The value to write into the entity body of the request.</param>
+            <param name="options">The options for the request.</param>
+            <typeparam name="T">The type of object to serialize.</typeparam>
+        </member>
+        <member name="M:RestBus.Client.RestBusClientExtensions.PutAsJsonAsync``1(System.Net.Http.HttpMessageInvoker,System.String,``0,System.Threading.CancellationToken,RestBus.Client.RequestOptions)">
+            <summary>Sends a PUT request as an asynchronous operation, with a specified value serialized as JSON. Includes a cancellation token to cancel the request.</summary>
+            <returns>A task object representing the asynchronous operation.</returns>
+            <param name="client">The client used to make the request.</param>
+            <param name="requestUri">The URI the request is sent to.</param>
+            <param name="value">The value to write into the entity body of the request.</param>
+            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation. </param>
+            <param name="options">The options for the request.</param>
+            <typeparam name="T">The type of object to serialize.</typeparam>
+        </member>
+        <member name="M:RestBus.Client.RestBusClientExtensions.PutAsXmlAsync``1(System.Net.Http.HttpMessageInvoker,System.String,``0,RestBus.Client.RequestOptions)">
+            <summary>Sends a PUT request as an asynchronous operation, with a specified value serialized as XML.</summary>
+            <returns>A task object representing the asynchronous operation.</returns>
+            <param name="client">The client used to make the request.</param>
+            <param name="requestUri">The URI the request is sent to.</param>
+            <param name="value">The value to write into the entity body of the request.</param>
+            <param name="options">The options for the request.</param>
+            <typeparam name="T">The type of object to serialize.</typeparam>
+        </member>
+        <member name="M:RestBus.Client.RestBusClientExtensions.PutAsXmlAsync``1(System.Net.Http.HttpMessageInvoker,System.String,``0,System.Threading.CancellationToken,RestBus.Client.RequestOptions)">
+            <summary>Sends a PUT request as an asynchronous operation, with a specified value serialized as XML. Includes a cancellation token to cancel the request.</summary>
+            <returns>A task object representing the asynchronous operation.</returns>
+            <param name="client">The client used to make the request.</param>
+            <param name="requestUri">The URI the request is sent to.</param>
+            <param name="value">The value to write into the entity body of the request.</param>
+            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+            <param name="options">The options for the request.</param>
+            <typeparam name="T">The type of object to serialize.</typeparam>
+        </member>
+        <member name="M:RestBus.Client.RestBusClientExtensions.PutAsync``1(System.Net.Http.HttpMessageInvoker,System.String,``0,RestBus.Client.Http.Formatting.MediaTypeFormatter,RestBus.Client.RequestOptions)">
+            <summary>Sends a PUT request as an asynchronous operation, with a specified value serialized using the given formatter.</summary>
+            <returns>A task object representing the asynchronous operation.</returns>
+            <param name="client">The client used to make the request.</param>
+            <param name="requestUri">The URI the request is sent to.</param>
+            <param name="value">The value to write into the entity body of the request.</param>
+            <param name="formatter">The formatter used to serialize the value.</param>
+            <param name="options">The options for the request.</param>
+            <typeparam name="T">The type of object to serialize.</typeparam>
+        </member>
+        <member name="M:RestBus.Client.RestBusClientExtensions.PutAsync``1(System.Net.Http.HttpMessageInvoker,System.String,``0,RestBus.Client.Http.Formatting.MediaTypeFormatter,System.Threading.CancellationToken,RestBus.Client.RequestOptions)">
+            <summary>Sends a PUT request as an asynchronous operation, with a specified value serialized using the given formatter and medai type string. Includes a cancellation token to cancel the request.</summary>
+            <returns>A task object representing the asynchronous operation.</returns>
+            <param name="client">The client used to make the request.</param>
+            <param name="requestUri">The URI the request is sent to.</param>
+            <param name="value">The value to write into the entity body of the request.</param>
+            <param name="formatter">The formatter used to serialize the value.</param>
+            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+            <param name="options">The options for the request.</param>
+            <typeparam name="T">The type of object to serialize.</typeparam>
+        </member>
+        <member name="M:RestBus.Client.RestBusClientExtensions.PutAsync``1(System.Net.Http.HttpMessageInvoker,System.String,``0,RestBus.Client.Http.Formatting.MediaTypeFormatter,System.String,RestBus.Client.RequestOptions)">
+            <summary>Sends a PUT request as an asynchronous operation, with a specified value serialized using the given formatter and media type string.</summary>
+            <returns>A task object representing the asynchronous operation.</returns>
+            <param name="client">The client used to make the request.</param>
+            <param name="requestUri">The URI the request is sent to.</param>
+            <param name="value">The value to write into the entity body of the request.</param>
+            <param name="formatter">The formatter used to serialize the value.</param>
+            <param name="mediaType">The authoritative value of the Content-Type header. Can be null, in which case the  default content type of the formatter will be used.</param>
+            <param name="options">The options for the request.</param>
+            <typeparam name="T">The type of object to serialize.</typeparam>
+        </member>
+        <member name="M:RestBus.Client.RestBusClientExtensions.PutAsync``1(System.Net.Http.HttpMessageInvoker,System.String,``0,RestBus.Client.Http.Formatting.MediaTypeFormatter,System.String,System.Threading.CancellationToken,RestBus.Client.RequestOptions)">
+            <summary>Sends a PUT request as an asynchronous operation, with a specified value serialized using the given formatter and media type string. Includes a cancellation token to cancel the request.</summary>
+            <returns>A task object representing the asynchronous operation.</returns>
+            <param name="client">The client used to make the request.</param>
+            <param name="requestUri">The URI the request is sent to.</param>
+            <param name="value">The value to write into the entity body of the request.</param>
+            <param name="formatter">The formatter used to serialize the value.</param>
+            <param name="mediaType">The authoritative value of the Content-Type header. Can be null, in which case the  default content type of the formatter will be used.</param>
+            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+            <param name="options">The options for the request.</param>
+            <typeparam name="T">The type of object to serialize.</typeparam>
+        </member>
+        <member name="M:RestBus.Client.RestBusClientExtensions.PutAsync``1(System.Net.Http.HttpMessageInvoker,System.String,``0,RestBus.Client.Http.Formatting.MediaTypeFormatter,System.Net.Http.Headers.MediaTypeHeaderValue,System.Threading.CancellationToken,RestBus.Client.RequestOptions)">
+            <summary> Sends a PUT request as an asynchronous operation, with a specified value serialized using the given formatter and media type. Includes a cancellation token to cancel the request.</summary>
+            <returns>A task object representing the asynchronous operation.</returns>
+            <param name="client">The client used to make the request.</param>
+            <param name="requestUri">The URI the request is sent to.</param>
+            <param name="value">The value to write into the entity body of the request.</param>
+            <param name="formatter">The formatter used to serialize the value.</param>
+            <param name="mediaType">The authoritative value of the Content-Type header. Can be null, in which case the  default content type of the formatter will be used.</param>
+            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+            <param name="options">The options for the request.</param>
+            <typeparam name="T">The type of object to serialize.</typeparam>
+        </member>
+        <member name="T:RestBus.Client.MessageInvokerBase">
+            <summary>
+            Base class for RestBus client implementations.
+            </summary>
+        </member>
+        <member name="M:RestBus.Client.MessageInvokerBase.DeleteAsync(System.String)">
+            <summary>Send a DELETE request to the specified Uri as an asynchronous operation.</summary>
+            <returns>Returns <see cref="T:System.Threading.Tasks.Task`1" />.The task object representing the asynchronous operation.</returns>
+            <param name="requestUri">The Uri the request is sent to.</param>
+            <exception cref="T:System.ArgumentNullException">The <paramref name="requestUri" /> was null.</exception>
+        </member>
+        <member name="M:RestBus.Client.MessageInvokerBase.DeleteAsync(System.Uri)">
+            <summary>Send a DELETE request to the specified Uri as an asynchronous operation.</summary>
+            <returns>Returns <see cref="T:System.Threading.Tasks.Task`1" />.The task object representing the asynchronous operation.</returns>
+            <param name="requestUri">The Uri the request is sent to.</param>
+            <exception cref="T:System.ArgumentNullException">The <paramref name="requestUri" /> was null.</exception>
+        </member>
+        <member name="M:RestBus.Client.MessageInvokerBase.DeleteAsync(System.String,System.Threading.CancellationToken)">
+            <summary>Send a DELETE request to the specified Uri with a cancellation token as an asynchronous operation.</summary>
+            <returns>Returns <see cref="T:System.Threading.Tasks.Task`1" />.The task object representing the asynchronous operation.</returns>
+            <param name="requestUri">The Uri the request is sent to.</param>
+            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+            <exception cref="T:System.ArgumentNullException">The <paramref name="requestUri" /> was null.</exception>
+        </member>
+        <member name="M:RestBus.Client.MessageInvokerBase.DeleteAsync(System.Uri,System.Threading.CancellationToken)">
+            <summary>Send a DELETE request to the specified Uri with a cancellation token as an asynchronous operation.</summary>
+            <returns>Returns <see cref="T:System.Threading.Tasks.Task`1" />.The task object representing the asynchronous operation.</returns>
+            <param name="requestUri">The Uri the request is sent to.</param>
+            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+            <exception cref="T:System.ArgumentNullException">The <paramref name="requestUri" /> was null.</exception>
+        </member>
+        <member name="M:RestBus.Client.MessageInvokerBase.GetAsync(System.String)">
+            <summary>Send a GET request to the specified Uri as an asynchronous operation.</summary>
+            <returns>Returns <see cref="T:System.Threading.Tasks.Task`1" />.The task object representing the asynchronous operation.</returns>
+            <param name="requestUri">The Uri the request is sent to.</param>
+            <exception cref="T:System.ArgumentNullException">The <paramref name="requestUri" /> was null.</exception>
+        </member>
+        <member name="M:RestBus.Client.MessageInvokerBase.GetAsync(System.Uri)">
+            <summary>Send a GET request to the specified Uri as an asynchronous operation.</summary>
+            <returns>Returns <see cref="T:System.Threading.Tasks.Task`1" />.The task object representing the asynchronous operation.</returns>
+            <param name="requestUri">The Uri the request is sent to.</param>
+            <exception cref="T:System.ArgumentNullException">The <paramref name="requestUri" /> was null.</exception>
+        </member>
+        <member name="M:RestBus.Client.MessageInvokerBase.GetAsync(System.String,System.Net.Http.HttpCompletionOption)">
+            <summary>Send a GET request to the specified Uri with an HTTP completion option as an asynchronous operation.</summary>
+            <returns>Returns <see cref="T:System.Threading.Tasks.Task`1" />.</returns>
+            <param name="requestUri">The Uri the request is sent to.</param>
+            <param name="completionOption">An HTTP completion option value that indicates when the operation should be considered completed.</param>
+            <exception cref="T:System.ArgumentNullException">The <paramref name="requestUri" /> was null.</exception>
+        </member>
+        <member name="M:RestBus.Client.MessageInvokerBase.GetAsync(System.Uri,System.Net.Http.HttpCompletionOption)">
+            <summary>Send a GET request to the specified Uri with an HTTP completion option as an asynchronous operation.</summary>
+            <returns>Returns <see cref="T:System.Threading.Tasks.Task`1" />.The task object representing the asynchronous operation.</returns>
+            <param name="requestUri">The Uri the request is sent to.</param>
+            <param name="completionOption">An HTTP  completion option value that indicates when the operation should be considered completed.</param>
+            <exception cref="T:System.ArgumentNullException">The <paramref name="requestUri" /> was null.</exception>
+        </member>
+        <member name="M:RestBus.Client.MessageInvokerBase.GetAsync(System.String,System.Threading.CancellationToken)">
+            <summary>Send a GET request to the specified Uri with a cancellation token as an asynchronous operation.</summary>
+            <returns>Returns <see cref="T:System.Threading.Tasks.Task`1" />.</returns>
+            <param name="requestUri">The Uri the request is sent to.</param>
+            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+            <exception cref="T:System.ArgumentNullException">The <paramref name="requestUri" /> was null.</exception>
+        </member>
+        <member name="M:RestBus.Client.MessageInvokerBase.GetAsync(System.Uri,System.Threading.CancellationToken)">
+            <summary>Send a GET request to the specified Uri with a cancellation token as an asynchronous operation.</summary>
+            <returns>Returns <see cref="T:System.Threading.Tasks.Task`1" />.The task object representing the asynchronous operation.</returns>
+            <param name="requestUri">The Uri the request is sent to.</param>
+            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+            <exception cref="T:System.ArgumentNullException">The <paramref name="requestUri" /> was null.</exception>
+        </member>
+        <member name="M:RestBus.Client.MessageInvokerBase.GetAsync(System.String,System.Net.Http.HttpCompletionOption,System.Threading.CancellationToken)">
+            <summary>Send a GET request to the specified Uri with an HTTP completion option and a cancellation token as an asynchronous operation.</summary>
+            <returns>Returns <see cref="T:System.Threading.Tasks.Task`1" />.</returns>
+            <param name="requestUri">The Uri the request is sent to.</param>
+            <param name="completionOption">An HTTP  completion option value that indicates when the operation should be considered completed.</param>
+            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+            <exception cref="T:System.ArgumentNullException">The <paramref name="requestUri" /> was null.</exception>
+        </member>
+        <member name="M:RestBus.Client.MessageInvokerBase.GetAsync(System.Uri,System.Net.Http.HttpCompletionOption,System.Threading.CancellationToken)">
+            <summary>Send a GET request to the specified Uri with an HTTP completion option and a cancellation token as an asynchronous operation.</summary>
+            <returns>Returns <see cref="T:System.Threading.Tasks.Task`1" />.The task object representing the asynchronous operation.</returns>
+            <param name="requestUri">The Uri the request is sent to.</param>
+            <param name="completionOption">An HTTP  completion option value that indicates when the operation should be considered completed.</param>
+            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+            <exception cref="T:System.ArgumentNullException">The <paramref name="requestUri" /> was null.</exception>
+        </member>
+        <member name="M:RestBus.Client.MessageInvokerBase.GetByteArrayAsync(System.String)">
+            <summary>Send a GET request to the specified Uri and return the response body as a byte array in an asynchronous operation.</summary>
+            <returns>Returns <see cref="T:System.Threading.Tasks.Task`1" />.The task object representing the asynchronous operation.</returns>
+            <param name="requestUri">The Uri the request is sent to.</param>
+            <exception cref="T:System.ArgumentNullException">The <paramref name="requestUri" /> was null.</exception>
+        </member>
+        <member name="M:RestBus.Client.MessageInvokerBase.GetByteArrayAsync(System.Uri)">
+            <summary>Send a GET request to the specified Uri and return the response body as a byte array in an asynchronous operation.</summary>
+            <returns>Returns <see cref="T:System.Threading.Tasks.Task`1" />.The task object representing the asynchronous operation.</returns>
+            <param name="requestUri">The Uri the request is sent to.</param>
+            <exception cref="T:System.ArgumentNullException">The <paramref name="requestUri" /> was null.</exception>
+        </member>
+        <member name="M:RestBus.Client.MessageInvokerBase.GetStreamAsync(System.String)">
+            <summary>Send a GET request to the specified Uri and return the response body as a stream in an asynchronous operation.</summary>
+            <returns>Returns <see cref="T:System.Threading.Tasks.Task`1" />.The task object representing the asynchronous operation.</returns>
+            <param name="requestUri">The Uri the request is sent to.</param>
+            <exception cref="T:System.ArgumentNullException">The <paramref name="requestUri" /> was null.</exception>
+        </member>
+        <member name="M:RestBus.Client.MessageInvokerBase.GetStreamAsync(System.Uri)">
+            <summary>Send a GET request to the specified Uri and return the response body as a stream in an asynchronous operation.</summary>
+            <returns>Returns <see cref="T:System.Threading.Tasks.Task`1" />.The task object representing the asynchronous operation.</returns>
+            <param name="requestUri">The Uri the request is sent to.</param>
+            <exception cref="T:System.ArgumentNullException">The <paramref name="requestUri" /> was null.</exception>
+        </member>
+        <member name="M:RestBus.Client.MessageInvokerBase.GetStringAsync(System.String)">
+            <summary>Send a GET request to the specified Uri and return the response body as a string in an asynchronous operation.</summary>
+            <returns>Returns <see cref="T:System.Threading.Tasks.Task`1" />.The task object representing the asynchronous operation.</returns>
+            <param name="requestUri">The Uri the request is sent to.</param>
+            <exception cref="T:System.ArgumentNullException">The <paramref name="requestUri" /> was null.</exception>
+        </member>
+        <member name="M:RestBus.Client.MessageInvokerBase.GetStringAsync(System.Uri)">
+            <summary>Send a GET request to the specified Uri and return the response body as a string in an asynchronous operation.</summary>
+            <returns>Returns <see cref="T:System.Threading.Tasks.Task`1" />.The task object representing the asynchronous operation.</returns>
+            <param name="requestUri">The Uri the request is sent to.</param>
+            <exception cref="T:System.ArgumentNullException">The <paramref name="requestUri" /> was null.</exception>
+        </member>
+        <member name="M:RestBus.Client.MessageInvokerBase.PostAsync(System.String,System.Net.Http.HttpContent)">
+            <summary>Send a POST request to the specified Uri as an asynchronous operation.</summary>
+            <returns>Returns <see cref="T:System.Threading.Tasks.Task`1" />.The task object representing the asynchronous operation.</returns>
+            <param name="requestUri">The Uri the request is sent to.</param>
+            <param name="content">The HTTP request content sent to the server.</param>
+            <exception cref="T:System.ArgumentNullException">The <paramref name="requestUri" /> was null.</exception>
+        </member>
+        <member name="M:RestBus.Client.MessageInvokerBase.PostAsync(System.Uri,System.Net.Http.HttpContent)">
+            <summary>Send a POST request to the specified Uri as an asynchronous operation.</summary>
+            <returns>Returns <see cref="T:System.Threading.Tasks.Task`1" />.The task object representing the asynchronous operation.</returns>
+            <param name="requestUri">The Uri the request is sent to.</param>
+            <param name="content">The HTTP request content sent to the server.</param>
+            <exception cref="T:System.ArgumentNullException">The <paramref name="requestUri" /> was null.</exception>
+        </member>
+        <member name="M:RestBus.Client.MessageInvokerBase.PostAsync(System.String,System.Net.Http.HttpContent,System.Threading.CancellationToken)">
+            <summary>Send a POST request with a cancellation token as an asynchronous operation.</summary>
+            <returns>Returns <see cref="T:System.Threading.Tasks.Task`1" />.The task object representing the asynchronous operation.</returns>
+            <param name="requestUri">The Uri the request is sent to.</param>
+            <param name="content">The HTTP request content sent to the server.</param>
+            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+            <exception cref="T:System.ArgumentNullException">The <paramref name="requestUri" /> was null.</exception>
+        </member>
+        <member name="M:RestBus.Client.MessageInvokerBase.PostAsync(System.Uri,System.Net.Http.HttpContent,System.Threading.CancellationToken)">
+            <summary>Send a POST request with a cancellation token as an asynchronous operation.</summary>
+            <returns>Returns <see cref="T:System.Threading.Tasks.Task`1" />.The task object representing the asynchronous operation.</returns>
+            <param name="requestUri">The Uri the request is sent to.</param>
+            <param name="content">The HTTP request content sent to the server.</param>
+            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+            <exception cref="T:System.ArgumentNullException">The <paramref name="requestUri" /> was null.</exception>
+        </member>
+        <member name="M:RestBus.Client.MessageInvokerBase.PutAsync(System.String,System.Net.Http.HttpContent)">
+            <summary>Send a PUT request to the specified Uri as an asynchronous operation.</summary>
+            <returns>Returns <see cref="T:System.Threading.Tasks.Task`1" />.The task object representing the asynchronous operation.</returns>
+            <param name="requestUri">The Uri the request is sent to.</param>
+            <param name="content">The HTTP request content sent to the server.</param>
+            <exception cref="T:System.ArgumentNullException">The <paramref name="requestUri" /> was null.</exception>
+        </member>
+        <member name="M:RestBus.Client.MessageInvokerBase.PutAsync(System.Uri,System.Net.Http.HttpContent)">
+            <summary>Send a PUT request to the specified Uri as an asynchronous operation.</summary>
+            <returns>Returns <see cref="T:System.Threading.Tasks.Task`1" />.The task object representing the asynchronous operation.</returns>
+            <param name="requestUri">The Uri the request is sent to.</param>
+            <param name="content">The HTTP request content sent to the server.</param>
+            <exception cref="T:System.ArgumentNullException">The <paramref name="requestUri" /> was null.</exception>
+        </member>
+        <member name="M:RestBus.Client.MessageInvokerBase.PutAsync(System.String,System.Net.Http.HttpContent,System.Threading.CancellationToken)">
+            <summary>Send a PUT request with a cancellation token as an asynchronous operation.</summary>
+            <returns>Returns <see cref="T:System.Threading.Tasks.Task`1" />.The task object representing the asynchronous operation.</returns>
+            <param name="requestUri">The Uri the request is sent to.</param>
+            <param name="content">The HTTP request content sent to the server.</param>
+            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+            <exception cref="T:System.ArgumentNullException">The <paramref name="requestUri" /> was null.</exception>
+        </member>
+        <member name="M:RestBus.Client.MessageInvokerBase.PutAsync(System.Uri,System.Net.Http.HttpContent,System.Threading.CancellationToken)">
+            <summary>Send a PUT request with a cancellation token as an asynchronous operation.</summary>
+            <returns>Returns <see cref="T:System.Threading.Tasks.Task`1" />.The task object representing the asynchronous operation.</returns>
+            <param name="requestUri">The Uri the request is sent to.</param>
+            <param name="content">The HTTP request content sent to the server.</param>
+            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+            <exception cref="T:System.ArgumentNullException">The <paramref name="requestUri" /> was null.</exception>
+        </member>
+        <member name="M:RestBus.Client.MessageInvokerBase.SendAsync(System.Net.Http.HttpRequestMessage)">
+            <summary>Send an HTTP request as an asynchronous operation.</summary>
+            <returns>Returns <see cref="T:System.Threading.Tasks.Task`1" />.The task object representing the asynchronous operation.</returns>
+            <param name="request">The HTTP request message to send.</param>
+            <exception cref="T:System.ArgumentNullException">The <paramref name="request" /> was null.</exception>
+        </member>
+        <member name="M:RestBus.Client.MessageInvokerBase.SendAsync(System.Net.Http.HttpRequestMessage,System.Net.Http.HttpCompletionOption)">
+            <summary>Send an HTTP request as an asynchronous operation.</summary>
+            <returns>Returns <see cref="T:System.Threading.Tasks.Task`1" />.The task object representing the asynchronous operation.</returns>
+            <param name="request">The HTTP request message to send.</param>
+            <param name="completionOption">When the operation should complete (as soon as a response is available or after reading the whole response content).</param>
+            <exception cref="T:System.ArgumentNullException">The <paramref name="request" /> was null.</exception>
+        </member>
+        <member name="M:RestBus.Client.MessageInvokerBase.SendAsync(System.Net.Http.HttpRequestMessage,System.Net.Http.HttpCompletionOption,System.Threading.CancellationToken)">
+            <summary>Send an HTTP request as an asynchronous operation. </summary>
+            <returns>Returns <see cref="T:System.Threading.Tasks.Task`1" />.The task object representing the asynchronous operation.</returns>
+            <param name="request">The HTTP request message to send.</param>
+            <param name="completionOption">When the operation should complete (as soon as a response is available or after reading the whole response content).</param>
+            <exception cref="T:System.ArgumentNullException">The <paramref name="request" /> was null.</exception>
+            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        </member>
+    </members>
+</doc>
