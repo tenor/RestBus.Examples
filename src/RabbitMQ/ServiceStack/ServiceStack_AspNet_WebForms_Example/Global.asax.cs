@@ -1,6 +1,6 @@
 ﻿using RestBus.ServiceStack;
 using RestBus.RabbitMQ;
-using RestBus.RabbitMQ.Subscriber;
+using RestBus.RabbitMQ.Subscription;
 
 using System;
 using System.Collections.Generic;
