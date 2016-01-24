@@ -1,4 +1,5 @@
-﻿using RestBus.RabbitMQ;
+﻿using RestBus.Client;
+using RestBus.RabbitMQ;
 using RestBus.RabbitMQ.Client;
 
 using System;
@@ -23,7 +24,7 @@ namespace ConsoleClientExample
 
             RequestOptions requestOptions = null;
             /* 
-             * //Uncomment this section to get a response in JSON format
+             * //Uncomment this section to get a response in JSON format (necessary when calling ServiceStack servers)
              * 
             requestOptions = new RequestOptions();
             requestOptions.Headers.Add("Accept", "application/json");
@@ -43,7 +44,7 @@ namespace ConsoleClientExample
         private async static Task<System.Net.Http.HttpResponseMessage> SendMessage(RestBusClient client, RequestOptions requestOptions)
         {
             //Send Request
-            var uri = "api/values"; //Substitute "hello/random" for the ServiceStack example
+            var uri = "api/values"; //Substitute "hello/random" for the ServiceStack self-hosted example and "api/hello/random" for the ServiceStack ASP.Net hosted example
             return await client.GetAsync(uri, requestOptions);
         }
     }
