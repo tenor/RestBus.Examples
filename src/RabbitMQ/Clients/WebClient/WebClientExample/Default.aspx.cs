@@ -1,4 +1,4 @@
-﻿using RestBus.RabbitMQ.Client;
+﻿using RestBus.Client;
 
 using System;
 using System.Collections.Generic;
