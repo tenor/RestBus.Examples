@@ -1,0 +1,290 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>RestBus.RabbitMQ</name>
+    </assembly>
+    <members>
+        <member name="M:RestBus.RabbitMQ.ChannelPooling.AmqpChannelPooler.SetRecycle">
+            <summary>
+            Sets a flag that indicates that pool should not be used any longer.
+            </summary>
+        </member>
+        <member name="M:RestBus.RabbitMQ.ChannelPooling.AmqpChannelPooler.DetermineDirectReplyToCapability(RabbitMQ.Client.IConnection)">
+            <summary>
+            Determines if a server has direct reply-to capability. 
+            </summary>
+        </member>
+        <member name="P:RestBus.RabbitMQ.ChannelPooling.AmqpModelContainer.Discard">
+            <summary>
+            Set to true if channel should NOT be returned to the pool.
+            </summary>
+        </member>
+        <member name="M:RestBus.RabbitMQ.BasicMessageMapper.GetHeaders(System.Net.Http.HttpRequestMessage)">
+            <summary>
+            Gets the Headers for the message.
+            </summary>
+            <remarks>
+            This is only useful for the headers exchange type.
+            </remarks>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RestBus.RabbitMQ.BasicMessageMapper.GetRequestOptions(System.Net.Http.HttpRequestMessage)">
+            <summary>
+            Returns the RequestOptions associated with a specified request.
+            </summary>
+            <remarks>
+            This helper is useful for classes deriving from BasicMessageMapper.
+            </remarks>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RestBus.RabbitMQ.BasicMessageMapper.StripUserInfoAndQuery(System.String)">
+            <summary>
+             Removes the username, password and query components of an AMQP uri.
+            </summary>
+        </member>
+        <member name="T:RestBus.RabbitMQ.Client.CallbackQueueRPCStrategy">
+            <summary>
+            Represents an RPC strategy that uses a callback queue to receive responses.
+            </summary>
+        </member>
+        <member name="M:RestBus.RabbitMQ.Client.CallbackQueueRPCStrategy.DiscoverDirectReplyToQueueName(RabbitMQ.Client.IModel,System.String)">
+            <summary>
+            Discovers the Direct reply-to queue name ( https://www.rabbitmq.com/direct-reply-to.html ) by messaging itself.
+            </summary>
+        </member>
+        <member name="F:RestBus.RabbitMQ.Client.ClientAckBehavior.Automatic">
+            <summary>
+            All responses received by the client are automatically acknowledged by the broker.
+            This is the default behavior.
+            </summary>
+        </member>
+        <member name="F:RestBus.RabbitMQ.Client.ClientAckBehavior.ValidResponses">
+            <summary>
+            Responses expected by the client in valid format are explicitly acknowledged. Other responses are rejected.
+            </summary>
+            <remarks>
+            This option is only effective when <see cref="P:RestBus.RabbitMQ.Client.ClientSettings.DisableDirectReplies"/> is true.
+            </remarks>
+        </member>
+        <member name="T:RestBus.RabbitMQ.Client.DirectReplyToRPCStrategy">
+            <summary>
+            Represents an RPC strategy that uses the RabbitMQ Direct Reply To feature.
+            </summary>
+            <remarks>
+            See https://www.rabbitmq.com/direct-reply-to.html
+            </remarks>
+        </member>
+        <member name="M:RestBus.RabbitMQ.Client.RestBusClient.#ctor(RestBus.Common.Amqp.IMessageMapper)">
+            <summary>
+            Initializes a new instance of the <see cref="T:RestBus.RabbitMQ.RestBusClient" /> class.
+            </summary>
+            <param name="messageMapper">The <see cref="T:RestBus.Common.Amqp.IMessageMapper" /> the client uses to route messages.</param>
+        </member>
+        <member name="M:RestBus.RabbitMQ.Client.RestBusClient.#ctor(RestBus.Common.Amqp.IMessageMapper,RestBus.RabbitMQ.Client.ClientSettings)">
+            <summary>
+            Initializes a new instance of the <see cref="T:RestBus.RabbitMQ.RestBusClient" /> class.
+            </summary>
+            <param name="messageMapper">The <see cref="T:RestBus.Common.Amqp.IMessageMapper" /> the client uses to route messages.</param>
+            <param name="settings">Client settings.</param>
+        </member>
+        <member name="P:RestBus.RabbitMQ.Client.RestBusClient.BaseAddress">
+            <summary>Gets or sets the base address of Uniform Resource Identifier (URI) of the Internet resource used when sending requests.</summary>
+            <returns>Returns <see cref="T:System.Uri" />.The base address of Uniform Resource Identifier (URI) of the Internet resource used when sending requests.</returns>
+        </member>
+        <member name="P:RestBus.RabbitMQ.Client.RestBusClient.DefaultRequestHeaders">
+            <summary>Gets the headers which should be sent with each request.</summary>
+            <returns>Returns <see cref="T:System.Net.Http.Headers.HttpRequestHeaders" />.The headers which should be sent with each request.</returns>
+        </member>
+        <member name="P:RestBus.RabbitMQ.Client.RestBusClient.MaxResponseContentBufferSize">
+            <summary>Gets or sets the maximum number of bytes to buffer when reading the response content.</summary>
+            <returns>Returns <see cref="T:System.Int32" />.The maximum number of bytes to buffer when reading the response content. The default value for this property is 64K.</returns>
+            <exception cref="T:System.ArgumentOutOfRangeException">The size specified is less than or equal to zero.</exception>
+            <exception cref="T:System.InvalidOperationException">An operation has already been started on the current instance. </exception>
+            <exception cref="T:System.ObjectDisposedException">The current instance has been disposed. </exception>
+        </member>
+        <member name="P:RestBus.RabbitMQ.Client.RestBusClient.Timeout">
+            <summary>Gets or sets the number of milliseconds to wait before the request times out.</summary>
+            <returns>Returns <see cref="T:System.TimeSpan" />.The number of milliseconds to wait before the request times out.</returns>
+            <exception cref="T:System.ArgumentOutOfRangeException">The timeout specified is less than zero and is not <see cref="F:System.Threading.Timeout.Infinite" />.</exception>
+            <exception cref="T:System.InvalidOperationException">An operation has already been started on the current instance. </exception>
+            <exception cref="T:System.ObjectDisposedException">The current instance has been disposed.</exception>
+        </member>
+        <member name="M:RestBus.RabbitMQ.Client.RestBusClient.CancelPendingRequests">
+            <summary>Cancel all pending requests on this instance.</summary>
+        </member>
+        <member name="M:RestBus.RabbitMQ.Client.RestBusClient.SendAsync(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)">
+            <summary>Send an HTTP request as an asynchronous operation.</summary>
+            <returns>Returns <see cref="T:System.Threading.Tasks.Task`1" />.The task object representing the asynchronous operation.</returns>
+            <param name="request">The HTTP request message to send.</param>
+            <param name="cancellationToken">The cancellation token to cancel operation.</param>
+            <exception cref="T:System.ArgumentNullException">The <paramref name="request" /> was null.</exception>
+        </member>
+        <member name="T:RestBus.RabbitMQ.Client.RabbitMQMessagingProperties">
+            <summary>
+            Represents a set of properties which individual messages can present to the RabbitMQ RestBus Client to override
+            settings in the <see cref="T:RestBus.Common.Amqp.IMessageMapper"/>, <see cref="T:RestBus.RabbitMQ.Client.RestBusClient"/> and <see cref="T:RestBus.Client.RequestOptions"/> classes.
+            </summary>
+        </member>
+        <member name="P:RestBus.RabbitMQ.Client.RabbitMQMessagingProperties.Persistent">
+            <summary>
+            Controls if the message is persisted or not.
+            It has no effect in non-durable (non-persisted) queues.
+            This overrides the PersistentMessages setting specified by <see cref="P:RestBus.Common.Amqp.IMessageMapper.MessagingConfig"/>.
+            Set to null to use the PersistentMessages setting specified by <see cref="P:RestBus.Common.Amqp.IMessageMapper.MessagingConfig"/>.
+            </summary>
+        </member>
+        <member name="P:RestBus.RabbitMQ.Client.RabbitMQMessagingProperties.Expiration">
+            <summary>
+            Controls if the message expires in the queue and how long the message stays in the queue before expiring.
+            This overrides the settings specified by <see cref="P:RestBus.RabbitMQ.Client.RestBusClient.Timeout"/>, MessageExpires property of <see cref="P:RestBus.Common.Amqp.IMessageMapper.MessagingConfig"/> and <see cref="P:RestBus.Client.RequestOptions.Timeout"/>.
+            Set to <see cref="F:System.Threading.Timeout.InfiniteTimeSpan"/> to specify that the message never expires.
+            Set to null, to use the settings specified by <see cref="P:RestBus.RabbitMQ.Client.RestBusClient.Timeout"/>, MessageExpires property of <see cref="P:RestBus.Common.Amqp.IMessageMapper.MessagingConfig"/> and <see cref="P:RestBus.Client.RequestOptions.Timeout"/>
+            </summary>
+            <remarks>
+            The client will still wait for a response within the Timeout period if either <see cref="P:RestBus.RabbitMQ.Client.RestBusClient.Timeout"/> or <see cref="P:RestBus.Client.RequestOptions.Timeout"/> is set, even if this property is less than those.
+            </remarks>
+        </member>
+        <member name="P:RestBus.RabbitMQ.Client.RabbitMQMessagingProperties.ExchangeKind">
+            <summary>
+            Controls what kind of exchange the message is sent to.
+            This overrides the ExchangeKind setting specified in <see cref="P:RestBus.RabbitMQ.Client.RestBusClient.Settings"/>.
+            Set to null, to use the ExchangeKind setting specified in <see cref="P:RestBus.RabbitMQ.Client.RestBusClient.Settings"/>.
+            </summary>
+        </member>
+        <member name="P:RestBus.RabbitMQ.Client.RabbitMQMessagingProperties.RoutingKey">
+            <summary>
+            Controls the routing key for the message.
+            This overrides the routing key setting specified by <see cref="M:RestBus.Common.Amqp.IMessageMapper.GetRoutingKey(System.Net.Http.HttpRequestMessage,RestBus.Common.Amqp.ExchangeKind)"/>.
+            Set to null to use the routing key setting specified by <see cref="M:RestBus.Common.Amqp.IMessageMapper.GetRoutingKey(System.Net.Http.HttpRequestMessage,RestBus.Common.Amqp.ExchangeKind)"/>.
+            </summary>
+        </member>
+        <member name="P:RestBus.RabbitMQ.Client.RabbitMQMessagingProperties.Headers">
+            <summary>
+            Controls the headers property for the message.
+            This is only useful when the exchange is a headers exchange type.
+            This overrides the headers setting specified by <see cref="M:RestBus.Common.Amqp.IMessageMapper.GetHeaders(System.Net.Http.HttpRequestMessage)"/>.
+            Set to null to use the headers setting specified by <see cref="M:RestBus.Common.Amqp.IMessageMapper.GetHeaders(System.Net.Http.HttpRequestMessage)"/>.
+            </summary>
+            <remarks>
+            This property should not be confused with the <see cref="M:RestBus.Client.RequestOptions.#ctor"/>, which sets the HTTP headers in the message.
+            </remarks>
+        </member>
+        <member name="T:RestBus.RabbitMQ.Consumer.ConcurrentQueueingConsumer">
+            <summary>
+            Provides an implementation of a queuing consumer that uses a ConcurrentQueue internally.
+            </summary>
+        </member>
+        <member name="M:RestBus.RabbitMQ.Consumer.ConcurrentQueueingConsumer.#ctor(RabbitMQ.Client.IModel,System.Threading.ManualResetEventSlim)">
+            <summary>
+            Initializes and instance of the <see cref="T:RestBus.RabbitMQ.Consumer.ConcurrentQueueingConsumer"/>
+            </summary>
+            <param name="model">The AMQP model.</param>
+            <param name="itemQueuedEvent">Signalled when a new item is added to the queue</param>
+        </member>
+        <member name="P:RestBus.RabbitMQ.Consumer.ConcurrentQueueingConsumer.ConsumerTag">
+            <summary>
+            Retrieve the consumer tag this consumer is registered as; to be used when discussing this consumer
+            with the server, for instance with <see cref="M:RabbitMQ.Client.IModel.BasicCancel(System.String)"/>.
+            </summary>
+        </member>
+        <member name="P:RestBus.RabbitMQ.Consumer.ConcurrentQueueingConsumer.IsRunning">
+            <summary>
+            Returns true while the consumer is registered and expecting deliveries from the broker.
+            </summary>
+        </member>
+        <member name="P:RestBus.RabbitMQ.Consumer.ConcurrentQueueingConsumer.ShutdownReason">
+            <summary>
+            If our <see cref="T:RabbitMQ.Client.IModel"/> shuts down, this property will contain a description of the reason for the
+            shutdown. Otherwise it will contain null. See <see cref="T:RabbitMQ.Client.ShutdownEventArgs"/>.
+            </summary>
+        </member>
+        <member name="P:RestBus.RabbitMQ.Consumer.ConcurrentQueueingConsumer.Model">
+            <summary>
+            Retrieve the <see cref="T:RabbitMQ.Client.IModel"/> this consumer is associated with,
+             for use in acknowledging received messages, for instance.
+            </summary>
+        </member>
+        <member name="E:RestBus.RabbitMQ.Consumer.ConcurrentQueueingConsumer.ConsumerCancelled">
+            <summary>
+            Signalled when the consumer gets cancelled.
+            </summary>
+        </member>
+        <member name="M:RestBus.RabbitMQ.Consumer.ConcurrentQueueingConsumer.HandleBasicCancel(System.String)">
+            <summary>
+             Called when the consumer is cancelled for reasons other than by a basicCancel:
+             e.g. the queue has been deleted (either by this channel or  by any other channel).
+             See <see cref="M:RestBus.RabbitMQ.Consumer.ConcurrentQueueingConsumer.HandleBasicCancelOk(System.String)"/> for notification of consumer cancellation due to basicCancel
+            </summary>
+            <param name="consumerTag">Consumer tag this consumer is registered.</param>
+        </member>
+        <member name="M:RestBus.RabbitMQ.Consumer.ConcurrentQueueingConsumer.HandleBasicCancelOk(System.String)">
+            <summary>
+            Called upon successful deregistration of the consumer from the broker.
+            </summary>
+            <param name="consumerTag">Consumer tag this consumer is registered.</param>
+        </member>
+        <member name="M:RestBus.RabbitMQ.Consumer.ConcurrentQueueingConsumer.HandleBasicConsumeOk(System.String)">
+            <summary>
+            Called upon successful registration of the consumer with the broker.
+            </summary>
+            <param name="consumerTag">Consumer tag this consumer is registered.</param>
+        </member>
+        <member name="M:RestBus.RabbitMQ.Consumer.ConcurrentQueueingConsumer.HandleBasicDeliver(System.String,System.UInt64,System.Boolean,System.String,System.String,RabbitMQ.Client.IBasicProperties,System.Byte[])">
+            <summary>
+            Called each time a message arrives for this consumer.
+            Queues received messages in the internal queue.
+            </summary>
+        </member>
+        <member name="M:RestBus.RabbitMQ.Consumer.ConcurrentQueueingConsumer.HandleModelShutdown(System.Object,RabbitMQ.Client.ShutdownEventArgs)">
+            <summary>
+             Called when the model shuts down.
+             </summary>
+             <param name="model"> Common AMQP model.</param>
+            <param name="reason"> Information about the reason why a particular model, session, or connection was destroyed.</param>/// 
+        </member>
+        <member name="M:RestBus.RabbitMQ.Consumer.ConcurrentQueueingConsumer.OnCancel">
+            <summary>
+            Called when consumer is cancelled
+            </summary>
+        </member>
+        <member name="M:RestBus.RabbitMQ.Consumer.ConcurrentQueueingConsumer.TryInstantDequeue(RabbitMQ.Client.Events.BasicDeliverEventArgs@,System.Boolean)">
+            <summary>
+            Attempts to dequeue an item without waiting
+            </summary>
+            <param name="result">The dequeued item.</param>
+            <returns>True if succeeded, false otherwise</returns>
+        </member>
+        <member name="T:RestBus.RabbitMQ.Subscription.MessageDispatch">
+            <summary>
+            Encapsulates a RabbitMQ message and its associated consumer.
+            </summary>
+        </member>
+        <member name="M:RestBus.RabbitMQ.Subscription.RestBusSubscriber.#ctor(RestBus.Common.Amqp.IMessageMapper)">
+            <summary>
+            Initislizes a new instance of the <see cref="T:RestBus.RabbitMQ.Subscription.RestBusSubscriber"/>
+            </summary>
+            <param name="messageMapper">The <see cref="T:RestBus.Common.Amqp.IMessageMapper"/> used by the subscriber.</param>
+        </member>
+        <member name="M:RestBus.RabbitMQ.Subscription.RestBusSubscriber.#ctor(RestBus.Common.Amqp.IMessageMapper,RestBus.RabbitMQ.Subscription.SubscriberSettings)">
+            <summary>
+            Initislizes a new instance of the <see cref="T:RestBus.RabbitMQ.Subscription.RestBusSubscriber"/>
+            </summary>
+            <param name="messageMapper">The <see cref="T:RestBus.Common.Amqp.IMessageMapper"/> used by the subscriber.</param>
+            <param name="settings">The subscriber settings</param>
+        </member>
+        <member name="F:RestBus.RabbitMQ.Subscription.SubscriberAckBehavior.ProcessedRequests">
+            <summary>
+            Requests are explicitly acknowledged after they have been fully processed.
+            Requests in an unexpected format are rejected.
+            This is the default behavior.
+            </summary>
+        </member>
+        <member name="F:RestBus.RabbitMQ.Subscription.SubscriberAckBehavior.Automatic">
+            <summary>
+            Requests are automatically acknowledged by the broker once they are received by the subscriber.
+            </summary>
+        </member>
+    </members>
+</doc>
