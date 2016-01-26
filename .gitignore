@@ -50,6 +50,9 @@ ipch/
 *.vsp
 *.vspx
 
+# ASP.Net Core files
+project.lock.json
+
 # Guidance Automation Toolkit
 *.gpState
 
