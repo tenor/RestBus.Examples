@@ -1,4 +1,4 @@
 RestBus.Examples
 ================
 
-Example projects that run RestBus
+Example projects that use RestBus libraries.
