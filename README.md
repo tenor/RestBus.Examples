@@ -1,4 +1,4 @@
 RestBus.Examples
 ================
 
-Example projects that use RestBus libraries.
+The  repo contains working example console and web clients projects, and working example ASP.NET Core, Web API and ServiceStack servers.
